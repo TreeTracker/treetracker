@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:treetracker/auth.dart';
 
 class BootScreen extends StatelessWidget {
   @override
@@ -22,6 +23,10 @@ class BootScreen extends StatelessWidget {
                   fontFamily: 'Ubuntu',
                   fontSize: 35,
                 ),
+              ),
+              RaisedButton(
+                child: Text('Continue'),
+                onPressed: () {},
               ),
             ],
           ),
