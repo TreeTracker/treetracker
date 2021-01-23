@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914724151820",
+    "project_id": "tree-tracker-ae602",
+    "storage_bucket": "tree-tracker-ae602.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914724151820:android:ac784c40b05462b8bb0429",
+        "android_client_info": {
+          "package_name": "com.example.treetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914724151820-4v3r150ecjk3ut6922kvb26vlj9nb1a6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPrVBzhZkCYbQz_6ckyld6TBCtT8rHIYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914724151820-4v3r150ecjk3ut6922kvb26vlj9nb1a6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
