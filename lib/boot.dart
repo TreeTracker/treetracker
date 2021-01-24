@@ -75,19 +75,20 @@ class _BootScreenState extends State<BootScreen> {
     return Scaffold(
       body: Container(
         color: Colors.grey[900],
+        width: MediaQuery.of(context).size.width,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image(image: AssetImage('assets/images/appLogo2.png')),
+              Image(image: AssetImage('assets/images/tree2.png')),
               Padding(
-                padding: EdgeInsets.all(30),
+                padding: EdgeInsets.all(20),
               ),
               Text(
                 'TreeTracker',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Ubuntu',
-                  fontSize: 35,
+                  fontSize: 25,
                 ),
               )
             ]),
