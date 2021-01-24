@@ -9,5 +9,5 @@ import 'dart:io';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(BootScreen());
+  runApp(Start());
 }
