@@ -46,8 +46,15 @@ class _AuthenticationState extends State<Authentication> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      body: CircularProgressIndicator(
-        backgroundColor: Colors.red,
+      body: Center(
+        child: SizedBox(
+          height: 75,
+          width: 75,
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.green,
+            strokeWidth: 7,
+          ),
+        ),
       ),
     );
   }
