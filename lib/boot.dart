@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:treetracker/auth.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:treetracker/home.dart';
+import 'package:treetracker/login.dart';
+
 class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,14 +23,28 @@ class BootScreen extends StatefulWidget {
 }
 
 class _BootScreenState extends State<BootScreen> {
+  User _user = FirebaseAuth.instance.currentUser;
+  GoogleSignIn _signIn = GoogleSignIn(scopes: ['email']);
+
   @override
   void initState() {
     super.initState();
-
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MyApp())));
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      setState(() {
+        _user = user;
+      });
+    });
+    if (_user == null) {
+      Timer(
+          Duration(seconds: 3),
+          () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginApp())));
+    } else {
+      Timer(
+          Duration(seconds: 3),
+          () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen())));
+    }
   }
 
   @override
