@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:treetracker/auth.dart';
@@ -24,8 +25,6 @@ class BootScreen extends StatefulWidget {
 
 class _BootScreenState extends State<BootScreen> {
   User _user = FirebaseAuth.instance.currentUser;
-  GoogleSignIn _signIn = GoogleSignIn(scopes: ['email']);
-
   @override
   void initState() {
     super.initState();
