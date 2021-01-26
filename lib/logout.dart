@@ -2,48 +2,28 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:treetracker/auth.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:treetracker/home.dart';
-import 'package:treetracker/login.dart';
-
-class Start extends StatelessWidget {
+class Logout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BootScreen(),
+      home: LogoutScreen(),
     );
   }
 }
 
-class BootScreen extends StatefulWidget {
+class LogoutScreen extends StatefulWidget {
   @override
-  _BootScreenState createState() => _BootScreenState();
+  _LogoutScreenState createState() => _LogoutScreenState();
 }
 
-class _BootScreenState extends State<BootScreen> {
-  User _user = FirebaseAuth.instance.currentUser;
+class _LogoutScreenState extends State<LogoutScreen> {
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.authStateChanges().listen((user) {
-      setState(() {
-        _user = user;
-      });
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      exit(0);
     });
-    if (_user == null) {
-      Timer(
-          Duration(seconds: 3),
-          () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginApp())));
-    } else {
-      Timer(
-          Duration(seconds: 3),
-          () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen())));
-    }
   }
 
   @override
@@ -62,7 +42,7 @@ class _BootScreenState extends State<BootScreen> {
               padding: EdgeInsets.all(20),
             ),
             Text(
-              'TreeTracker',
+              'Logged Out',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Ubuntu',
