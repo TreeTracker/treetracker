@@ -5,7 +5,7 @@ void main() {
 }
 
 class HomeScreen extends StatelessWidget {
-  final appTitle = 'HomeScreen';
+  final appTitle = 'TreeTracker';
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class MyHomePage extends StatelessWidget {
               onTap: () {},
             ),
             ListTile(
-              leading: Icon(Icons.chat),
+              leading: Icon(Icons.language_rounded),
               title: Text('News'),
               onTap: () {},
             ),
@@ -72,13 +72,15 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: Colors.green,
-          onPressed: () {},
-          label: Text(
-            'Add',
-            style: TextStyle(fontSize: 18),
-          ),
-          icon: Icon(Icons.add)),
+        backgroundColor: Colors.green,
+        onPressed: () {},
+        label: Text(
+          'Add New Tree',
+          style: TextStyle(fontSize: 18),
+        ),
+        icon: Icon(Icons.nature_people_outlined),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
