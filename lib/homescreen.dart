@@ -71,6 +71,14 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.green,
+          onPressed: () {},
+          label: Text(
+            'Add',
+            style: TextStyle(fontSize: 18),
+          ),
+          icon: Icon(Icons.add)),
     );
   }
 }
