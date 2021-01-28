@@ -1,33 +1,49 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-
 import 'auth.dart';
-
-void main() {
-  runApp(HomeScreen());
-}
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 class HomeScreen extends StatelessWidget {
-  final appTitle = 'TreeTracker';
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: appTitle,
-      home: MyHomePage(title: appTitle),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-  MyHomePage({Key key, this.title}) : super(key: key);
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Container(
+        child: Text(
+          'LOL',
+        ),
+      ),
       appBar: AppBar(
-        title: Text(title),
+        title: Text('TreeTracker'),
         backgroundColor: Colors.green,
         actions: [
           IconButton(
@@ -43,7 +59,7 @@ class MyHomePage extends StatelessWidget {
         child: ListView(
           children: [
             DrawerHeader(
-              child: Text('TreeTracker logo'),
+              child: Container(),
             ),
             ListTile(
               leading: Icon(Icons.local_florist),

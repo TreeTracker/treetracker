@@ -36,6 +36,7 @@ dev_dependencies:
   google_sign_in: ^4.5.6
   firebase_core: ^0.5.2
   flutter_auth_buttons: ^0.10.0
+  back_button_interceptor: ^4.4.1
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
