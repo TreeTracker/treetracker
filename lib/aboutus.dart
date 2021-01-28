@@ -6,7 +6,7 @@ void main() => runApp(
           backgroundColor: Colors.grey,
           body: Center(
             child: Image(
-              image: AssetImage('lib/images/logo.png'),
+              image: AssetImage('assets/images/tree2.png'),
             ),
           ),
           appBar: AppBar(

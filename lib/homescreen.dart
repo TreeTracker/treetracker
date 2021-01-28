@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'auth.dart';
+
 void main() {
   runApp(HomeScreen());
 }
@@ -66,7 +68,12 @@ class MyHomePage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.logout),
               title: Text('Log out'),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Auth()),
+                );
+              },
             ),
           ],
         ),
