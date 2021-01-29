@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:treetracker/AQI%20API%20Handling/aqi.dart';
 import 'auth.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -19,10 +20,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  User _user = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
     super.initState();
     BackButtonInterceptor.add(myInterceptor);
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      setState(() {
+        _user = user;
+      });
+    });
   }
 
   @override
@@ -39,9 +46,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text(
-          'LOL',
-        ),
+        color: Colors.grey[900],
+        // child: Text(
+        //   'LOL',
+        // ),
       ),
       appBar: AppBar(
         title: Text('TreeTracker'),
@@ -57,59 +65,74 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Container(),
-            ),
-            ListTile(
-              leading: Icon(Icons.local_florist),
-              title: Text('My Trees'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.wb_sunny),
-              title: Text('Climate Change'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.cloud),
-              title: Text('AQI'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Aqi()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.language_rounded),
-              title: Text('News'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.people),
-              title: Text('About Us'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Log out'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Auth()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Exit'),
-              onTap: () {
-                exit(0);
-              },
-            ),
-          ],
+        child: Container(
+          color: Colors.grey[600],
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Column(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Colors.green,
+                      backgroundImage: NetworkImage(_user.photoURL.toString()),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                    ),
+                    Text(_user.displayName),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.local_florist),
+                title: Text('My Trees'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.wb_sunny),
+                title: Text('Climate Change'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.cloud),
+                title: Text('AQI'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Aqi()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.language_rounded),
+                title: Text('News'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.people),
+                title: Text('About Us'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Log out'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Auth()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Exit'),
+                onTap: () {
+                  exit(0);
+                },
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
