@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:treetracker/AQI%20API%20Handling/aqi.dart';
 import 'auth.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
@@ -74,7 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               leading: Icon(Icons.cloud),
               title: Text('AQI'),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Aqi()),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.language_rounded),
