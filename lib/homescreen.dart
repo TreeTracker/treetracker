@@ -72,6 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {},
             ),
             ListTile(
+              leading: Icon(Icons.cloud),
+              title: Text('AQI'),
+              onTap: () {},
+            ),
+            ListTile(
               leading: Icon(Icons.language_rounded),
               title: Text('News'),
               onTap: () {},
@@ -91,6 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Exit'),
+              onTap: () {},
+            ),
           ],
         ),
       ),
@@ -101,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
           'Add New Tree',
           style: TextStyle(fontSize: 18),
         ),
-        icon: Icon(Icons.nature_people_outlined),
+        icon: Icon(Icons.nature_people),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
