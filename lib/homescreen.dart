@@ -44,6 +44,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var ouruser = FirebaseAuth.instance.currentUser;
+    while (ouruser == null) {
+      return Scaffold(
+        backgroundColor: Colors.grey[900],
+        body: Center(
+          child: SizedBox(
+            height: 75,
+            width: 75,
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.green,
+              strokeWidth: 7,
+            ),
+          ),
+        ),
+      );
+    }
     return Scaffold(
       body: Container(
         color: Colors.grey[900],
@@ -75,12 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     CircleAvatar(
                       radius: 40,
                       backgroundColor: Colors.green,
-                      backgroundImage: NetworkImage(_user.photoURL.toString()),
+                      backgroundImage:
+                          NetworkImage(ouruser.photoURL.toString()),
                     ),
                     Padding(
                       padding: EdgeInsets.all(10),
                     ),
-                    Text(_user.displayName),
+                    Text(ouruser.displayName),
                   ],
                 ),
               ),
