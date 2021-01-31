@@ -23,7 +23,7 @@ class Aqi extends StatelessWidget {
             ),
             title: Text('AQI'),
             centerTitle: true,
-            backgroundColor: Colors.grey[900],
+            backgroundColor: Colors.green,
           ),
           body: ShowData(),
         ),

@@ -1,31 +1,8 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
-
-// void main(List<String> arguments) async {
-//   var url = '';
-//   var response = await http.get(url);
-//   if (response.statusCode == 200) {
-//     var jsonResponse = convert.jsonDecode(response.body);
-//     print(jsonResponse["data"]["current"]["pollution"]["aqius"]);
-//     return;
-//   } else {
-//     print('Request failed with status: ${response.statusCode}.');
-//   }
-// }
-
-// class Show extends StatelessWidget {
-//   @override
-//   Future<void> getData() async {}
-
-//   Widget build(BuildContext context) {
-//     getData();
-//     print(data);
-//     return
-//   }
-// }
 
 class ShowData extends StatefulWidget {
   @override
@@ -33,13 +10,21 @@ class ShowData extends StatefulWidget {
 }
 
 class _ShowDataState extends State<ShowData> {
-  // var i =1;
-
   var response;
   var jsonResponse;
   var url;
   var name;
   var sname;
+  List colors = [
+    Colors.red,
+    Colors.pink,
+    Colors.deepPurple,
+    Colors.blue,
+    Colors.blueAccent,
+    Colors.indigo,
+    Colors.redAccent,
+  ];
+  Random random = new Random();
 
   Future<List<Data>> _getData() async {
     var apiKey = '';
@@ -61,28 +46,21 @@ class _ShowDataState extends State<ShowData> {
     ];
     var data;
     List<Data> myData = [];
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i <= 5; i++) {
       url = 'http://api.airvisual.com/v2/city?city=' +
           cities[i] +
           '&state=' +
           states[i] +
           '&country=india&key=' +
           apiKey;
-      // url =
-      //     "http://api.airvisual.com/v2/city?city=mumbai&state=maharashtra&country=india&key=e951f105-9114-4774-a578-518d03b76651";
       response = await http.get(url);
       if (response.statusCode == 200) {
-        print('got Response');
         jsonResponse = convert.jsonDecode(response.body);
-        print('got JSON');
         data = jsonResponse["data"]["current"]["pollution"]["aqius"].toString();
         name = jsonResponse["data"]["city"];
         sname = jsonResponse["data"]["state"];
-        print('got Data');
         Data presentData = Data(name, sname, data);
-        print(presentData);
         myData.add(presentData);
-        print('got Data2');
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -91,21 +69,6 @@ class _ShowDataState extends State<ShowData> {
     return (myData);
   }
 
-// var url = '';
-//     for (var i = 0; i < 5; i++) {
-//       url = 'http://api.airvisual.com/v2/city?city=' +
-//           cities[i] +
-//           '&state=' +
-//           states[i] +
-//           '&country=india&key=' +
-//           apiKey;
-//       response = await http.get(url);
-//       jsonResponse = convert.jsonDecode(response.body);
-//       data[i] =
-//           jsonResponse["data"]["current"]["pollution"]["aqius"].toString();
-//       print(data[i]);
-//     }
-//     print(data);
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -114,15 +77,53 @@ class _ShowDataState extends State<ShowData> {
         if (snapshot.data == null) {
           return Container(
             child: Center(
-              child: Text('Loading'),
+              child: SizedBox(
+                height: 75,
+                width: 75,
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.green,
+                  strokeWidth: 7,
+                ),
+              ),
             ),
           );
         } else {
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text(snapshot.data[index].cityName),
+              return Padding(
+                padding: EdgeInsets.all(10),
+                child: Card(
+                  color: colors[random.nextInt(7)],
+                  child: Container(
+                    height: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              snapshot.data[index].cityName,
+                              style:
+                                  TextStyle(fontSize: 35, color: Colors.white),
+                            ),
+                            Text(
+                              snapshot.data[index].stateName,
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          snapshot.data[index].aqi,
+                          style: TextStyle(fontSize: 35, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               );
             },
           );
@@ -135,25 +136,7 @@ class _ShowDataState extends State<ShowData> {
 class Data {
   final String cityName;
   final String stateName;
-  final String AQI;
+  final String aqi;
 
-  Data(this.cityName, this.stateName, this.AQI);
+  Data(this.cityName, this.stateName, this.aqi);
 }
-
-// class Show extends StatelessWidget {
-//   var url =
-//       'http://api.airvisual.com/v2/city?city=mumbai&state=maharashtra&country=india&key=e951f105-9114-4774-a578-518d03b76651';
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder(
-//       future: http.get(url),
-//     );
-//   }
-// }
-
-// class ShowData extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
