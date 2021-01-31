@@ -34,11 +34,21 @@ class Show extends StatelessWidget {
   ];
   var data = [];
   // var i =1;
-
-  void getData() {
+  var apiKey = 'e951f105-9114-4774-a578-518d03b76651';
+  var response;
+  var jsonResponse;
+  Future<void> getData() async {
     var url = '';
     for (var i = 0; i < 5; i++) {
-      url = "";
+      url = 'http://api.airvisual.com/v2/city?city=' +
+          cities[i] +
+          '&state=' +
+          states[i] +
+          '&country=india&key=' +
+          apiKey;
+      response = await http.get(url);
+      jsonResponse = convert.jsonDecode(response.body);
+      data[i] = jsonResponse["data"]["current"]["pollution"]["aqius"];
     }
   }
 

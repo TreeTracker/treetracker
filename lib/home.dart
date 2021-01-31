@@ -83,27 +83,19 @@ class _AppHomePageState extends State<AppHomePage> {
             ),
           ),
         ),
-        body: Column(
+        body: ListView(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(5),
+            Container(
+              color: Colors.grey[900],
+              height: 50,
+              child: Greetings(),
             ),
-            Center(
+            Card(
               child: Container(
-                color: Colors.grey[900],
-                height: 50,
-                child: Greetings(),
+                child: Text("News"),
               ),
             ),
-            ListView(
-              children: [
-                Card(
-                  child: Container(
-                    child: Text("News"),
-                  ),
-                ),
-              ],
-            )
+            //New Cards Here
           ],
         ),
       ),
