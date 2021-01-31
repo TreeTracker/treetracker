@@ -31,20 +31,6 @@ class _AppHomePageState extends State<AppHomePage> {
             ),
           ],
         ),
-        body: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(5),
-            ),
-            Center(
-              child: Container(
-                color: Colors.grey[900],
-                height: 50,
-                child: Greetings(),
-              ),
-            ),
-          ],
-        ),
         drawer: Drawer(
           child: Container(
             color: Colors.grey[600],
@@ -96,6 +82,21 @@ class _AppHomePageState extends State<AppHomePage> {
               ],
             ),
           ),
+        ),
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(5),
+            ),
+            Center(
+              child: Container(
+                color: Colors.grey[900],
+                height: 50,
+                child: Greetings(),
+              ),
+            ),
+            //List View
+          ],
         ),
       ),
     );
