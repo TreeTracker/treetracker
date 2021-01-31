@@ -95,7 +95,15 @@ class _AppHomePageState extends State<AppHomePage> {
                 child: Greetings(),
               ),
             ),
-            //List View
+            ListView(
+              children: [
+                Card(
+                  child: Container(
+                    child: Text("News"),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
