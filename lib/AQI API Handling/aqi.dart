@@ -25,7 +25,7 @@ class Aqi extends StatelessWidget {
             centerTitle: true,
             backgroundColor: Colors.grey[900],
           ),
-          body: Show(),
+          body: ShowData(),
         ),
       ),
     );
