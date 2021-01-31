@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(Aqi());
+}
+
 class Aqi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
