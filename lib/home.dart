@@ -92,7 +92,30 @@ class _AppHomePageState extends State<AppHomePage> {
             ),
             Card(
               child: Container(
+                color: Colors.red[400],
+                child: Text("My Trees"),
+                height: 300,
+              ),
+            ),
+            Card(
+              child: Container(
+                color: Colors.blue[400],
+                child: Text("AQI"),
+                height: 150,
+              ),
+            ),
+            Card(
+              child: Container(
+                color: Colors.blue[400],
                 child: Text("News"),
+                height: 150,
+              ),
+            ),
+            Card(
+              child: Container(
+                color: Colors.orange[300],
+                child: Text("Climate Change"),
+                height: 150,
               ),
             ),
             //New Cards Here
