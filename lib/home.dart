@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:treetracker/AQI%20API%20Handling/aqi.dart';
 import 'auth.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main(List<String> args) {
   runApp(
@@ -18,10 +19,17 @@ class AppHomePage extends StatefulWidget {
 }
 
 class _AppHomePageState extends State<AppHomePage> {
+  // User _user = FirebaseAuth.instance.currentUser;
+
   @override
   void initState() {
     super.initState();
     BackButtonInterceptor.add(myInterceptor);
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      setState(() {
+        // _user = user;
+      });
+    });
   }
 
   @override
@@ -36,6 +44,22 @@ class _AppHomePageState extends State<AppHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var ouruser = FirebaseAuth.instance.currentUser;
+    while (ouruser == null) {
+      return Scaffold(
+        backgroundColor: Colors.grey[900],
+        body: Center(
+          child: SizedBox(
+            height: 75,
+            width: 75,
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.green,
+              strokeWidth: 7,
+            ),
+          ),
+        ),
+      );
+    }
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[900],
@@ -58,21 +82,27 @@ class _AppHomePageState extends State<AppHomePage> {
                 DrawerHeader(
                   child: Column(
                     children: <Widget>[
-                      // CircleAvatar(
-                      //   radius: 40,
-                      //   backgroundColor: Colors.green,
-                      //   backgroundImage:
-                      //       NetworkImage(ouruser.photoURL.toString()),
-                      // ),
+                      CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.green,
+                        backgroundImage:
+                            NetworkImage(ouruser.photoURL.toString()),
+                      ),
                       Padding(
                         padding: EdgeInsets.all(10),
                       ),
-                      // Text(ouruser.displayName),
+                      Text(
+                        ouruser.displayName,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 ListTile(
                   tileColor: Colors.grey[800],
+                  focusColor: Colors.green,
                   leading: Icon(
                     Icons.help_center_rounded,
                     color: Colors.white,
