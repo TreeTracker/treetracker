@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:treetracker/AQI%20API%20Handling/aqi.dart';
 import 'auth.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main(List<String> args) {
   runApp(
@@ -16,6 +18,22 @@ class AppHomePage extends StatefulWidget {
 }
 
 class _AppHomePageState extends State<AppHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,7 +95,7 @@ class _AppHomePageState extends State<AppHomePage> {
                   leading: Icon(Icons.exit_to_app),
                   title: Text('Exit'),
                   onTap: () {
-                    // exit(0);
+                    exit(0);
                   },
                 ),
               ],
