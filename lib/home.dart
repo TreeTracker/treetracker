@@ -52,7 +52,7 @@ class _AppHomePageState extends State<AppHomePage> {
         ),
         drawer: Drawer(
           child: Container(
-            color: Colors.grey[600],
+            color: Colors.grey[900],
             child: ListView(
               children: [
                 DrawerHeader(
@@ -72,18 +72,45 @@ class _AppHomePageState extends State<AppHomePage> {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.help_center_rounded),
-                  title: Text('Help'),
+                  tileColor: Colors.grey[800],
+                  leading: Icon(
+                    Icons.help_center_rounded,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Help',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {},
                 ),
                 ListTile(
-                  leading: Icon(Icons.people),
-                  title: Text('About Us'),
+                  tileColor: Colors.grey[800],
+                  leading: Icon(
+                    Icons.people,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'About Us',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {},
                 ),
                 ListTile(
-                  leading: Icon(Icons.logout),
-                  title: Text('Log out'),
+                  tileColor: Colors.grey[800],
+                  leading: Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Log out',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -92,8 +119,17 @@ class _AppHomePageState extends State<AppHomePage> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text('Exit'),
+                  tileColor: Colors.grey[800],
+                  leading: Icon(
+                    Icons.exit_to_app,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Exit',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {
                     exit(0);
                   },
