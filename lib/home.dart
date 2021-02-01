@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:treetracker/AQI%20API%20Handling/aqi.dart';
+import 'auth.dart';
 
 void main(List<String> args) {
   runApp(
@@ -66,10 +67,10 @@ class _AppHomePageState extends State<AppHomePage> {
                   leading: Icon(Icons.logout),
                   title: Text('Log out'),
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => Auth()),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Auth()),
+                    );
                   },
                 ),
                 ListTile(

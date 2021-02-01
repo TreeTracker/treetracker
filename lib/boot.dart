@@ -6,6 +6,7 @@ import 'package:treetracker/auth.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:treetracker/home.dart';
 import 'package:treetracker/login.dart';
 
 import 'homescreen.dart';
@@ -43,7 +44,7 @@ class _BootScreenState extends State<BootScreen> {
       Timer(
           Duration(seconds: 3),
           () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen())));
+              context, MaterialPageRoute(builder: (context) => AppHomePage())));
     }
   }
 
