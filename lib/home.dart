@@ -59,8 +59,13 @@ class _AppHomePageState extends State<AppHomePage> {
       child: Scaffold(
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
-          title: Text('TreeTracker'),
-          backgroundColor: Colors.grey[900],
+          title: Text(
+            'TreeTracker',
+            style: TextStyle(
+              fontFamily: 'Ubuntu',
+            ),
+          ),
+          backgroundColor: Colors.green,
           centerTitle: true,
           actions: [
             IconButton(
@@ -165,8 +170,12 @@ class _AppHomePageState extends State<AppHomePage> {
         ),
         body: ListView(
           children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
             Container(
               color: Colors.grey[900],
+              alignment: Alignment.center,
               height: 50,
               child: Greetings(),
             ),
@@ -216,14 +225,6 @@ class _AppHomePageState extends State<AppHomePage> {
                       ),
                     ],
                   ),
-                  // child: Text(
-                  //   'My Trees',
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(
-                  //     fontSize: 25,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
                 ),
               ),
             ),
@@ -351,17 +352,19 @@ class _GreetingsState extends State<Greetings> {
       }
     }
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(
-          width: 30,
-        ),
         GetIcon(),
         SizedBox(
-          width: 30,
+          width: 10,
         ),
         Text(
           greet,
-          style: TextStyle(fontSize: 25, color: Colors.white),
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+            fontFamily: 'Ubuntu',
+          ),
         ),
       ],
     );
