@@ -176,33 +176,30 @@ class _AppHomePageState extends State<AppHomePage> {
               child: Greetings(),
             ),
             Card(
-              child: Container(
-                color: Colors.red[400],
-                child: Text("My Trees"),
-                height: 300,
+              margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(19)),
+              child: InkWell(
+                splashColor: Colors.blue.withAlpha(30),
+                onTap: () {},
+                child: Container(
+                  // decoration: BoxDecoration(
+                  //   image: DecorationImage(
+                  //     image: AssetImage("tree3.png"),
+                  //     fit: BoxFit.fitWidth,
+                  //     alignment: Alignment.topCenter,
+                  //   ),
+                  // ),
+                  width: 150,
+                  height: 200,
+                  child: Text('News',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                ),
               ),
             ),
-            Card(
-              child: Container(
-                color: Colors.blue[400],
-                child: Text("AQI"),
-                height: 150,
-              ),
-            ),
-            Card(
-              child: Container(
-                color: Colors.blue[400],
-                child: Text("News"),
-                height: 150,
-              ),
-            ),
-            Card(
-              child: Container(
-                color: Colors.orange[300],
-                child: Text("Climate Change"),
-                height: 150,
-              ),
-            ),
+
             //New Cards Here
           ],
         ),
