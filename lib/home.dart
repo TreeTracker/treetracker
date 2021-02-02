@@ -19,16 +19,12 @@ class AppHomePage extends StatefulWidget {
 }
 
 class _AppHomePageState extends State<AppHomePage> {
-  // User _user = FirebaseAuth.instance.currentUser;
-
   @override
   void initState() {
     super.initState();
     BackButtonInterceptor.add(myInterceptor);
     FirebaseAuth.instance.authStateChanges().listen((user) {
-      setState(() {
-        // _user = user;
-      });
+      setState(() {});
     });
   }
 
@@ -178,76 +174,70 @@ class _AppHomePageState extends State<AppHomePage> {
             Card(
               margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
               shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(19)),
+                borderRadius: new BorderRadius.circular(19),
+              ),
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap: () {},
                 child: Container(
-                  // decoration: BoxDecoration(
-                  //   image: DecorationImage(
-                  //     image: AssetImage("tree3.png"),
-                  //     fit: BoxFit.fitWidth,
-                  //     alignment: Alignment.topCenter,
-                  //   ),
-                  // ),
-                  width: 150,
+                  width: MediaQuery.of(context).size.width,
                   height: 200,
-                  child: Text('My Trees',
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    'My Trees',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),
 
             Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: <Widget>[
                 Card(
                   margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
                   shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(19)),
+                    borderRadius: new BorderRadius.circular(19),
+                  ),
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {},
                     child: Container(
-                      // decoration: BoxDecoration(
-                      //   image: DecorationImage(
-                      //     image: AssetImage("tree3.png"),
-                      //     fit: BoxFit.fitWidth,
-                      //     alignment: Alignment.topCenter,
-                      //   ),
-                      // ),
-                      width: 170,
+                      width: (MediaQuery.of(context).size.width / 2) - 35,
                       height: 200,
-                      child: Text('Weather',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold)),
+                      child: Text(
+                        'Weather',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 Card(
                   margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
                   shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(19)),
+                    borderRadius: new BorderRadius.circular(19),
+                  ),
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {},
                     child: Container(
-                      // decoration: BoxDecoration(
-                      //   image: DecorationImage(
-                      //     image: AssetImage("tree3.png"),
-                      //     fit: BoxFit.fitWidth,
-                      //     alignment: Alignment.topCenter,
-                      //   ),
-                      // ),
-                      width: 170,
+                      width: (MediaQuery.of(context).size.width / 2) - 35,
                       height: 200,
-                      child: Text('AQI',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold)),
+                      child: Text(
+                        'AQI',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -256,48 +246,44 @@ class _AppHomePageState extends State<AppHomePage> {
             Card(
               margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
               shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(19)),
+                borderRadius: new BorderRadius.circular(19),
+              ),
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap: () {},
                 child: Container(
-                  // decoration: BoxDecoration(
-                  //   image: DecorationImage(
-                  //     image: AssetImage("tree3.png"),
-                  //     fit: BoxFit.fitWidth,
-                  //     alignment: Alignment.topCenter,
-                  //   ),
-                  // ),
-                  width: 150,
+                  width: MediaQuery.of(context).size.width,
                   height: 200,
-                  child: Text('News',
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    'News',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),
             Card(
               margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
               shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(19)),
+                borderRadius: new BorderRadius.circular(19),
+              ),
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap: () {},
                 child: Container(
-                  // decoration: BoxDecoration(
-                  //   image: DecorationImage(
-                  //     image: AssetImage("tree3.png"),
-                  //     fit: BoxFit.fitWidth,
-                  //     alignment: Alignment.topCenter,
-                  //   ),
-                  // ),
-                  width: 150,
+                  width: MediaQuery.of(context).size.width,
                   height: 200,
-                  child: Text('Climate Change',
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  child: Text(
+                    'Climate Change',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -357,7 +343,6 @@ class _GetIconState extends State<GetIcon> {
   @override
   Widget build(BuildContext context) {
     var hour = DateTime.now().hour;
-    var greet;
     if (hour < 12) {
       return Icon(
         Icons.wb_sunny,
