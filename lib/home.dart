@@ -192,7 +192,109 @@ class _AppHomePageState extends State<AppHomePage> {
                   // ),
                   width: 150,
                   height: 200,
+                  child: Text('My Trees',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ),
+
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Card(
+                  margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(19)),
+                  child: InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {},
+                    child: Container(
+                      // decoration: BoxDecoration(
+                      //   image: DecorationImage(
+                      //     image: AssetImage("tree3.png"),
+                      //     fit: BoxFit.fitWidth,
+                      //     alignment: Alignment.topCenter,
+                      //   ),
+                      // ),
+                      width: 170,
+                      height: 200,
+                      child: Text('Weather',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ),
+                Card(
+                  margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(19)),
+                  child: InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {},
+                    child: Container(
+                      // decoration: BoxDecoration(
+                      //   image: DecorationImage(
+                      //     image: AssetImage("tree3.png"),
+                      //     fit: BoxFit.fitWidth,
+                      //     alignment: Alignment.topCenter,
+                      //   ),
+                      // ),
+                      width: 170,
+                      height: 200,
+                      child: Text('AQI',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Card(
+              margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(19)),
+              child: InkWell(
+                splashColor: Colors.blue.withAlpha(30),
+                onTap: () {},
+                child: Container(
+                  // decoration: BoxDecoration(
+                  //   image: DecorationImage(
+                  //     image: AssetImage("tree3.png"),
+                  //     fit: BoxFit.fitWidth,
+                  //     alignment: Alignment.topCenter,
+                  //   ),
+                  // ),
+                  width: 150,
+                  height: 200,
                   child: Text('News',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(19)),
+              child: InkWell(
+                splashColor: Colors.blue.withAlpha(30),
+                onTap: () {},
+                child: Container(
+                  // decoration: BoxDecoration(
+                  //   image: DecorationImage(
+                  //     image: AssetImage("tree3.png"),
+                  //     fit: BoxFit.fitWidth,
+                  //     alignment: Alignment.topCenter,
+                  //   ),
+                  // ),
+                  width: 150,
+                  height: 200,
+                  child: Text('Climate Change',
                       textAlign: TextAlign.center,
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
