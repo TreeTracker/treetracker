@@ -114,10 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 leading: Icon(Icons.cloud),
                 title: Text('AQI'),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Aqi()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => Aqi()),
+                  // );
                 },
               ),
               ListTile(

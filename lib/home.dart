@@ -181,14 +181,49 @@ class _AppHomePageState extends State<AppHomePage> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  child: Text(
-                    'My Trees',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        color: Colors.grey[900],
+                        alignment: Alignment.center,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image(
+                            image: AssetImage('assets/images/map.jpg'),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'My Trees',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                backgroundColor: Colors.white24,
+                                // color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  // child: Text(
+                  //   'My Trees',
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //     fontSize: 25,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                 ),
               ),
             ),
