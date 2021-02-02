@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:treetracker/AQI%20API%20Handling/aqi.dart';
 import 'auth.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
