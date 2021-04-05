@@ -57,6 +57,13 @@ class _AppHomePageState extends State<AppHomePage> {
     }
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(
+            Icons.add_a_photo_rounded,
+          ),
+          backgroundColor: Colors.green,
+        ),
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text(
@@ -69,7 +76,7 @@ class _AppHomePageState extends State<AppHomePage> {
           centerTitle: true,
           actions: [
             IconButton(
-              icon: Icon(Icons.camera_alt_rounded),
+              icon: Icon(Icons.help_outline_rounded),
               onPressed: () {},
             ),
           ],
@@ -193,12 +200,13 @@ class _AppHomePageState extends State<AppHomePage> {
                   child: Stack(
                     children: <Widget>[
                       Container(
-                        color: Colors.grey[900],
-                        alignment: Alignment.center,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
-                          child: Image(
-                            image: AssetImage('assets/images/map.jpg'),
+                          child: Image.asset(
+                            'assets/images/map.jpg',
+                            width: 5000,
+                            height: 5000,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
@@ -235,7 +243,7 @@ class _AppHomePageState extends State<AppHomePage> {
                 Card(
                   margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
                   shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(19),
+                    borderRadius: new BorderRadius.circular(25),
                   ),
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
@@ -243,13 +251,39 @@ class _AppHomePageState extends State<AppHomePage> {
                     child: Container(
                       width: (MediaQuery.of(context).size.width / 2) - 35,
                       height: 200,
-                      child: Text(
-                        'Weather',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(25),
+                              child: Image.asset(
+                                'assets/images/weather.jpg',
+                                width: 5000,
+                                height: 5000,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Weather',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    // backgroundColor: Colors.white24,
+                                    // color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -257,7 +291,7 @@ class _AppHomePageState extends State<AppHomePage> {
                 Card(
                   margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
                   shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(19),
+                    borderRadius: new BorderRadius.circular(25),
                   ),
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
@@ -265,14 +299,51 @@ class _AppHomePageState extends State<AppHomePage> {
                     child: Container(
                       width: (MediaQuery.of(context).size.width / 2) - 35,
                       height: 200,
-                      child: Text(
-                        'AQI',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(25),
+                              child: Image.asset(
+                                'assets/images/aqi.jpg',
+                                width: 5000,
+                                height: 5000,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // SizedBox(
+                                //   width: 100,
+                                // ),
+                                Text(
+                                  'AQI',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    // backgroundColor: Colors.white24,
+                                    // color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
+                      // child: Text(
+                      //   'AQI',
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //     fontSize: 25,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
                     ),
                   ),
                 ),
@@ -281,7 +352,7 @@ class _AppHomePageState extends State<AppHomePage> {
             Card(
               margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
               shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(19),
+                borderRadius: new BorderRadius.circular(25),
               ),
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -289,21 +360,57 @@ class _AppHomePageState extends State<AppHomePage> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  child: Text(
-                    'News',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.asset(
+                            'assets/images/news.jpg',
+                            width: 5000,
+                            height: 5000,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'News',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                // backgroundColor: Colors.white24,
+                                // color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  // child: Text(
+                  //   'News',
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //     fontSize: 25,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                 ),
               ),
             ),
             Card(
               margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
               shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(19),
+                borderRadius: new BorderRadius.circular(25),
               ),
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -311,14 +418,50 @@ class _AppHomePageState extends State<AppHomePage> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
-                  child: Text(
-                    'Climate Change',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.asset(
+                            'assets/images/climate2.jpg',
+                            width: 5000,
+                            height: 5000,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Climate Change',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                backgroundColor: Colors.white24,
+                                // color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  // child: Text(
+                  //   'Climate Change',
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //     fontSize: 25,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                 ),
               ),
             ),
