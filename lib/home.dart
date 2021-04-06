@@ -58,13 +58,23 @@ class _AppHomePageState extends State<AppHomePage> {
     }
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
-          child: Icon(
-            Icons.add_a_photo_rounded,
+          icon: Icon(
+            Icons.add_a_photo_outlined,
+            color: Colors.green,
           ),
-          backgroundColor: Colors.green,
+          label: Text(
+            'New Tree',
+            style: TextStyle(
+              color: Colors.green,
+              fontFamily: 'Ubuntu',
+            ),
+          ),
+          // backgroundColor: Colors.grey[900],
+          backgroundColor: Colors.grey[800],
         ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text(
@@ -103,6 +113,7 @@ class _AppHomePageState extends State<AppHomePage> {
                         ouruser.displayName,
                         style: TextStyle(
                           color: Colors.white,
+                          fontFamily: 'Ubuntu',
                         ),
                       ),
                     ],
@@ -119,6 +130,7 @@ class _AppHomePageState extends State<AppHomePage> {
                     'Help',
                     style: TextStyle(
                       color: Colors.white,
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                   onTap: () {},
@@ -133,6 +145,7 @@ class _AppHomePageState extends State<AppHomePage> {
                     'About Us',
                     style: TextStyle(
                       color: Colors.white,
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                   onTap: () {},
@@ -147,6 +160,7 @@ class _AppHomePageState extends State<AppHomePage> {
                     'Log out',
                     style: TextStyle(
                       color: Colors.white,
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                   onTap: () {
@@ -166,6 +180,7 @@ class _AppHomePageState extends State<AppHomePage> {
                     'Exit',
                     style: TextStyle(
                       color: Colors.white,
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                   onTap: () {
@@ -223,6 +238,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 25,
+                                fontFamily: 'Ubuntu',
                                 fontWeight: FontWeight.bold,
                                 backgroundColor: Colors.white24,
                                 // color: Colors.white,
@@ -275,6 +291,7 @@ class _AppHomePageState extends State<AppHomePage> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 25,
+                                    fontFamily: 'Ubuntu',
                                     fontWeight: FontWeight.bold,
                                     // backgroundColor: Colors.white24,
                                     // color: Colors.white,
@@ -330,6 +347,7 @@ class _AppHomePageState extends State<AppHomePage> {
                                   'AQI',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
+                                    fontFamily: 'Ubuntu',
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     // backgroundColor: Colors.white24,
@@ -390,6 +408,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               'News',
                               textAlign: TextAlign.center,
                               style: TextStyle(
+                                fontFamily: 'Ubuntu',
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
                                 // backgroundColor: Colors.white24,
@@ -456,6 +475,7 @@ class _AppHomePageState extends State<AppHomePage> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 25,
+                                    fontFamily: 'Ubuntu',
                                     fontWeight: FontWeight.bold,
                                     // backgroundColor: Colors.white24,
                                     // color: Colors.white,
