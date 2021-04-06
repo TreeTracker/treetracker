@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'AqiApiHandling/aqi.dart';
 import 'auth.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -295,7 +296,12 @@ class _AppHomePageState extends State<AppHomePage> {
                   ),
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Aqi()),
+                      );
+                    },
                     child: Container(
                       width: (MediaQuery.of(context).size.width / 2) - 35,
                       height: 200,
@@ -424,7 +430,7 @@ class _AppHomePageState extends State<AppHomePage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
                           child: Image.asset(
-                            'assets/images/climate2.jpg',
+                            'assets/images/climate4.jpeg',
                             width: 5000,
                             height: 5000,
                             fit: BoxFit.fill,
@@ -434,21 +440,29 @@ class _AppHomePageState extends State<AppHomePage> {
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              'Climate Change',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                backgroundColor: Colors.white24,
-                                // color: Colors.white,
-                              ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Climate Change',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    // backgroundColor: Colors.white24,
+                                    // color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(),
                           ],
                         ),
                       ),
