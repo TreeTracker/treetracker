@@ -100,13 +100,17 @@ class _AppHomePageState extends State<AppHomePage> {
             'TreeTracker',
             style: TextStyle(
               fontFamily: 'Ubuntu',
+              color: Colors.green,
             ),
           ),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.grey[800],
           centerTitle: true,
           actions: [
             IconButton(
-              icon: Icon(Icons.help_outline_rounded),
+              icon: Icon(
+                Icons.help_outline_rounded,
+                // color: Colors.wh,
+              ),
               onPressed: () {},
             ),
           ],
