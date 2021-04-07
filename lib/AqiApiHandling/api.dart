@@ -94,7 +94,8 @@ class _ShowDataState extends State<ShowData> {
               return Padding(
                 padding: EdgeInsets.all(10),
                 child: Card(
-                  color: colors[random.nextInt(7)],
+                  // color: colors[random.nextInt(7)],
+                  color: Colors.grey[800],
                   child: Container(
                     height: 100,
                     child: Row(
@@ -106,19 +107,29 @@ class _ShowDataState extends State<ShowData> {
                           children: <Widget>[
                             Text(
                               snapshot.data[index].cityName,
-                              style:
-                                  TextStyle(fontSize: 35, color: Colors.white),
+                              style: TextStyle(
+                                fontSize: 35,
+                                color: Colors.green,
+                                fontFamily: 'Ubuntu',
+                              ),
                             ),
                             Text(
                               snapshot.data[index].stateName,
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                                fontFamily: 'Ubuntu',
+                              ),
                             ),
                           ],
                         ),
                         Text(
                           snapshot.data[index].aqi,
-                          style: TextStyle(fontSize: 35, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 35,
+                            color: Colors.white,
+                            fontFamily: 'Ubuntu',
+                          ),
                         ),
                       ],
                     ),
