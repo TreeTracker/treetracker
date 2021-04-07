@@ -59,23 +59,41 @@ class _AppHomePageState extends State<AppHomePage> {
     }
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
-          icon: Icon(
-            Icons.add_a_photo_outlined,
-            color: Colors.green,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              FloatingActionButton.extended(
+                heroTag: null,
+                // onPressed: _getIss,
+                onPressed: () {},
+                label: Text('Exit App'),
+                backgroundColor: Colors.grey[800],
+                icon: Icon(
+                  Icons.exit_to_app_outlined,
+                  color: Colors.green,
+                ),
+              ),
+              FloatingActionButton.extended(
+                heroTag: null,
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => ISS()),
+                  // );
+                },
+                backgroundColor: Colors.grey[800],
+                icon: Icon(
+                  Icons.add_a_photo_outlined,
+                  color: Colors.green,
+                ),
+                label: Text('New Tree'),
+              ),
+            ],
           ),
-          label: Text(
-            'New Tree',
-            style: TextStyle(
-              color: Colors.green,
-              fontFamily: 'Ubuntu',
-            ),
-          ),
-          // backgroundColor: Colors.grey[900],
-          backgroundColor: Colors.grey[800],
         ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text(
