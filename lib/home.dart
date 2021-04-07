@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:treetracker/climatechange.dart';
 import 'AqiApiHandling/aqi.dart';
 import 'auth.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -439,7 +440,12 @@ class _AppHomePageState extends State<AppHomePage> {
               ),
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ClimateChange()),
+                  );
+                },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
