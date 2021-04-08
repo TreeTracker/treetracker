@@ -39,6 +39,9 @@ dev_dependencies:
   flutter_auth_buttons: ^0.10.0
   back_button_interceptor: ^4.4.1
   http: ^0.12.2
+  firebase_database: ^4.4.0
+  cloud_firestore: ^0.14.4
+  geolocator: ^6.1.14
   image_picker: ^0.6.7+14
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
