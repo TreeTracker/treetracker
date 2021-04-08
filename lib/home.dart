@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:treetracker/climatechange.dart';
 import 'AqiApiHandling/aqi.dart';
 import 'auth.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 void main(List<String> args) {
@@ -23,22 +22,24 @@ class _AppHomePageState extends State<AppHomePage> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
+    // BackButtonInterceptor.add(myInterceptor);
     FirebaseAuth.instance.authStateChanges().listen((user) {
       setState(() {});
     });
   }
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   BackButtonInterceptor.remove(myInterceptor);
+  //   super.dispose();
+  // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    return true;
-  }
+  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  //   return true;
+  // }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  DateTime currentBackPressTime;
   @override
   Widget build(BuildContext context) {
     var ouruser = FirebaseAuth.instance.currentUser;
@@ -57,479 +58,510 @@ class _AppHomePageState extends State<AppHomePage> {
         ),
       );
     }
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              FloatingActionButton.extended(
-                heroTag: null,
-                // onPressed: _getIss,
-                onPressed: () {},
-                label: Text('Exit App'),
-                backgroundColor: Colors.grey[800],
-                icon: Icon(
-                  Icons.exit_to_app_outlined,
-                  color: Colors.green,
+    return WillPopScope(
+      onWillPop: () {
+        DateTime now = DateTime.now();
+        if (currentBackPressTime == null ||
+            now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+          currentBackPressTime = now;
+          _scaffoldKey.currentState.showSnackBar(
+              new SnackBar(content: new Text('Press Again to Exit')));
+          return Future.value(false);
+        }
+        exit(0);
+      },
+      // onWillPop: () => handleWillPop(context),
+      child: SafeArea(
+        child: Scaffold(
+          key: _scaffoldKey,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                FloatingActionButton.extended(
+                  elevation: 10,
+                  heroTag: null,
+                  // onPressed: _getIss,
+                  onPressed: () {
+                    exit(0);
+                  },
+                  label: Text(
+                    'Exit App',
+                    style: TextStyle(
+                      fontFamily: 'Ubuntu',
+                      color: Colors.green,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey[800],
+                  icon: Icon(
+                    Icons.exit_to_app_outlined,
+                    color: Colors.green,
+                  ),
                 ),
+                FloatingActionButton.extended(
+                  heroTag: null,
+                  onPressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => ISS()),
+                    // );
+                  },
+                  backgroundColor: Colors.grey[800],
+                  icon: Icon(
+                    Icons.add_a_photo_outlined,
+                    color: Colors.green,
+                  ),
+                  label: Text(
+                    'New Tree',
+                    style: TextStyle(
+                      fontFamily: 'Ubuntu',
+                      color: Colors.green,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          backgroundColor: Colors.grey[900],
+          appBar: AppBar(
+            title: Text(
+              'TreeTracker',
+              style: TextStyle(
+                fontFamily: 'Ubuntu',
+                color: Colors.green,
               ),
-              FloatingActionButton.extended(
-                heroTag: null,
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => ISS()),
-                  // );
-                },
-                backgroundColor: Colors.grey[800],
+            ),
+            backgroundColor: Colors.grey[800],
+            centerTitle: true,
+            actions: [
+              IconButton(
                 icon: Icon(
-                  Icons.add_a_photo_outlined,
-                  color: Colors.green,
+                  Icons.help_outline_rounded,
+                  // color: Colors.wh,
                 ),
-                label: Text('New Tree'),
+                onPressed: () {},
               ),
             ],
           ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        backgroundColor: Colors.grey[900],
-        appBar: AppBar(
-          title: Text(
-            'TreeTracker',
-            style: TextStyle(
-              fontFamily: 'Ubuntu',
-              color: Colors.green,
-            ),
-          ),
-          backgroundColor: Colors.grey[800],
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.help_outline_rounded,
-                // color: Colors.wh,
-              ),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        drawer: Drawer(
-          child: Container(
-            color: Colors.grey[900],
-            child: ListView(
-              children: [
-                DrawerHeader(
-                  child: Column(
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 45,
-                        backgroundColor: Colors.green,
-                        backgroundImage:
-                            NetworkImage(ouruser.photoURL.toString()),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                      ),
-                      Text(
-                        ouruser.displayName,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Ubuntu',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ListTile(
-                  tileColor: Colors.grey[800],
-                  focusColor: Colors.green,
-                  leading: Icon(
-                    Icons.help_center_rounded,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Help',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Ubuntu',
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  tileColor: Colors.grey[800],
-                  leading: Icon(
-                    Icons.people,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'About Us',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Ubuntu',
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  tileColor: Colors.grey[800],
-                  leading: Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Log out',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Ubuntu',
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Auth()),
-                    );
-                  },
-                ),
-                ListTile(
-                  tileColor: Colors.grey[800],
-                  leading: Icon(
-                    Icons.exit_to_app,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Exit',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Ubuntu',
-                    ),
-                  ),
-                  onTap: () {
-                    exit(0);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-        body: ListView(
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Container(
+          drawer: Drawer(
+            child: Container(
               color: Colors.grey[900],
-              alignment: Alignment.center,
-              height: 50,
-              child: Greetings(),
-            ),
-            Card(
-              margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-              shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(19),
-              ),
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap: () {},
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.asset(
-                            'assets/images/map.jpg',
-                            width: 5000,
-                            height: 5000,
-                            fit: BoxFit.fill,
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                    child: Column(
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 45,
+                          backgroundColor: Colors.green,
+                          backgroundImage:
+                              NetworkImage(ouruser.photoURL.toString()),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                        ),
+                        Text(
+                          ouruser.displayName,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Ubuntu',
                           ),
                         ),
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'My Trees',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.bold,
-                                backgroundColor: Colors.white24,
-                                // color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Card(
-                  margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(25),
-                  ),
-                  child: InkWell(
-                    splashColor: Colors.blue.withAlpha(30),
-                    onTap: () {},
-                    child: Container(
-                      width: (MediaQuery.of(context).size.width / 2) - 35,
-                      height: 200,
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: Image.asset(
-                                'assets/images/weather.jpg',
-                                width: 5000,
-                                height: 5000,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Weather',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Ubuntu',
-                                    fontWeight: FontWeight.bold,
-                                    // backgroundColor: Colors.white24,
-                                    // color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      ],
                     ),
                   ),
-                ),
-                Card(
-                  margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(25),
+                  ListTile(
+                    tileColor: Colors.grey[800],
+                    focusColor: Colors.green,
+                    leading: Icon(
+                      Icons.help_center_rounded,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      'Help',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Ubuntu',
+                      ),
+                    ),
+                    onTap: () {},
                   ),
-                  child: InkWell(
-                    splashColor: Colors.blue.withAlpha(30),
+                  ListTile(
+                    tileColor: Colors.grey[800],
+                    leading: Icon(
+                      Icons.people,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      'About Us',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Ubuntu',
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    tileColor: Colors.grey[800],
+                    leading: Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      'Log out',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Ubuntu',
+                      ),
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Aqi()),
+                        MaterialPageRoute(builder: (context) => Auth()),
                       );
                     },
-                    child: Container(
-                      width: (MediaQuery.of(context).size.width / 2) - 35,
-                      height: 200,
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: Image.asset(
-                                'assets/images/aqi.jpg',
-                                width: 5000,
-                                height: 5000,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // SizedBox(
-                                //   width: 100,
-                                // ),
-                                Text(
-                                  'AQI',
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                    fontFamily: 'Ubuntu',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    // backgroundColor: Colors.white24,
-                                    // color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(),
-                              ],
-                            ),
-                          ),
-                        ],
+                  ),
+                  ListTile(
+                    tileColor: Colors.grey[800],
+                    leading: Icon(
+                      Icons.exit_to_app,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      'Exit',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Ubuntu',
                       ),
-                      // child: Text(
-                      //   'AQI',
-                      //   textAlign: TextAlign.center,
-                      //   style: TextStyle(
-                      //     fontSize: 25,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
+                    ),
+                    onTap: () {
+                      exit(0);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          body: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                color: Colors.grey[900],
+                alignment: Alignment.center,
+                height: 50,
+                child: Greetings(),
+              ),
+              Card(
+                margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(19),
+                ),
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {},
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image.asset(
+                              'assets/images/map.jpg',
+                              width: 5000,
+                              height: 5000,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'My Trees',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Ubuntu',
+                                  fontWeight: FontWeight.bold,
+                                  backgroundColor: Colors.white24,
+                                  // color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
-            Card(
-              margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-              shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(25),
               ),
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap: () {},
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.asset(
-                            'assets/images/news.jpg',
-                            width: 5000,
-                            height: 5000,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'News',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                // backgroundColor: Colors.white24,
-                                // color: Colors.white,
+
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Card(
+                    margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(25),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.blue.withAlpha(30),
+                      onTap: () {},
+                      child: Container(
+                        width: (MediaQuery.of(context).size.width / 2) - 35,
+                        height: 200,
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: Image.asset(
+                                  'assets/images/weather.jpg',
+                                  width: 5000,
+                                  height: 5000,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
-                            SizedBox(),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Weather',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Ubuntu',
+                                      fontWeight: FontWeight.bold,
+                                      // backgroundColor: Colors.white24,
+                                      // color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                  // child: Text(
-                  //   'News',
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(
-                  //     fontSize: 25,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
+                  Card(
+                    margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(25),
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.blue.withAlpha(30),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Aqi()),
+                        );
+                      },
+                      child: Container(
+                        width: (MediaQuery.of(context).size.width / 2) - 35,
+                        height: 200,
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: Image.asset(
+                                  'assets/images/aqi.jpg',
+                                  width: 5000,
+                                  height: 5000,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // SizedBox(
+                                  //   width: 100,
+                                  // ),
+                                  Text(
+                                    'AQI',
+                                    textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      fontFamily: 'Ubuntu',
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      // backgroundColor: Colors.white24,
+                                      // color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        // child: Text(
+                        //   'AQI',
+                        //   textAlign: TextAlign.center,
+                        //   style: TextStyle(
+                        //     fontSize: 25,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Card(
+                margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(25),
                 ),
-              ),
-            ),
-            Card(
-              margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
-              shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(25),
-              ),
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ClimateChange()),
-                  );
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.asset(
-                            'assets/images/climate4.jpeg',
-                            width: 5000,
-                            height: 5000,
-                            fit: BoxFit.fill,
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {},
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image.asset(
+                              'assets/images/news.jpg',
+                              width: 5000,
+                              height: 5000,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 10,
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'News',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  // backgroundColor: Colors.white24,
+                                  // color: Colors.white,
                                 ),
-                                Text(
-                                  'Climate Change',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Ubuntu',
-                                    fontWeight: FontWeight.bold,
-                                    // backgroundColor: Colors.white24,
-                                    // color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                              ),
+                              SizedBox(),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    // child: Text(
+                    //   'News',
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //     fontSize: 25,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
                   ),
-                  // child: Text(
-                  //   'Climate Change',
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(
-                  //     fontSize: 25,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
                 ),
               ),
-            ),
+              Card(
+                margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(25),
+                ),
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ClimateChange()),
+                    );
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image.asset(
+                              'assets/images/climate4.jpeg',
+                              width: 5000,
+                              height: 5000,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Climate Change',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Ubuntu',
+                                      fontWeight: FontWeight.bold,
+                                      // backgroundColor: Colors.white24,
+                                      // color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    // child: Text(
+                    //   'Climate Change',
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //     fontSize: 25,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                  ),
+                ),
+              ),
 
-            //New Cards Here
-          ],
+              //New Cards Here
+            ],
+          ),
         ),
       ),
     );
