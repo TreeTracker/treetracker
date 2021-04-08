@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:treetracker/climatechange.dart';
 import 'AqiApiHandling/aqi.dart';
 import 'auth.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -58,36 +59,58 @@ class _AppHomePageState extends State<AppHomePage> {
     }
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
-          icon: Icon(
-            Icons.add_a_photo_outlined,
-            color: Colors.green,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              FloatingActionButton.extended(
+                heroTag: null,
+                // onPressed: _getIss,
+                onPressed: () {},
+                label: Text('Exit App'),
+                backgroundColor: Colors.grey[800],
+                icon: Icon(
+                  Icons.exit_to_app_outlined,
+                  color: Colors.green,
+                ),
+              ),
+              FloatingActionButton.extended(
+                heroTag: null,
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => ISS()),
+                  // );
+                },
+                backgroundColor: Colors.grey[800],
+                icon: Icon(
+                  Icons.add_a_photo_outlined,
+                  color: Colors.green,
+                ),
+                label: Text('New Tree'),
+              ),
+            ],
           ),
-          label: Text(
-            'New Tree',
-            style: TextStyle(
-              color: Colors.green,
-              fontFamily: 'Ubuntu',
-            ),
-          ),
-          // backgroundColor: Colors.grey[900],
-          backgroundColor: Colors.grey[800],
         ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text(
             'TreeTracker',
             style: TextStyle(
               fontFamily: 'Ubuntu',
+              color: Colors.green,
             ),
           ),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.grey[800],
           centerTitle: true,
           actions: [
             IconButton(
-              icon: Icon(Icons.help_outline_rounded),
+              icon: Icon(
+                Icons.help_outline_rounded,
+                // color: Colors.wh,
+              ),
               onPressed: () {},
             ),
           ],
@@ -439,7 +462,12 @@ class _AppHomePageState extends State<AppHomePage> {
               ),
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ClimateChange()),
+                  );
+                },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 200,
