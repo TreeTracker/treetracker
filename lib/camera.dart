@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 void main() async {
@@ -23,6 +24,7 @@ class LandingScreen extends StatefulWidget {
 
 class _LandingScreenState extends State<LandingScreen> {
   File _image;
+  Position _currentPosition;
 
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -61,6 +63,18 @@ class _LandingScreenState extends State<LandingScreen> {
               ),
             ),
           ),
+          if (_currentPosition != null)
+            Text(
+              "LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+          FlatButton(
+            onPressed: () {
+              _getCurrentLocation();
+              print(_getCurrentLocation());
+            },
+            child: Text("Find Location"),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -91,5 +105,16 @@ class _LandingScreenState extends State<LandingScreen> {
         ],
       ),
     );
+  }
+
+  _getCurrentLocation() {
+    Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError((e) {
+      print(e);
+    });
   }
 }
