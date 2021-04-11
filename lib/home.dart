@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:treetracker/climatechange.dart';
 import 'AqiApiHandling/aqi.dart';
+import 'addtree.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -65,7 +66,7 @@ class _AppHomePageState extends State<AppHomePage> {
             now.difference(currentBackPressTime) > Duration(seconds: 2)) {
           currentBackPressTime = now;
           _scaffoldKey.currentState.showSnackBar(
-              new SnackBar(content: new Text('Press Again to Exit')));
+              new SnackBar(content: new Text('Press Back Again to Exit')));
           return Future.value(false);
         }
         exit(0);
@@ -74,57 +75,28 @@ class _AppHomePageState extends State<AppHomePage> {
       child: SafeArea(
         child: Scaffold(
           key: _scaffoldKey,
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FloatingActionButton.extended(
-                  elevation: 10,
-                  heroTag: null,
-                  // onPressed: _getIss,
-                  onPressed: () {
-                    exit(0);
-                  },
-                  label: Text(
-                    'Exit App',
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      color: Colors.green,
-                    ),
-                  ),
-                  backgroundColor: Colors.grey[800],
-                  icon: Icon(
-                    Icons.exit_to_app_outlined,
-                    color: Colors.green,
-                  ),
-                ),
-                FloatingActionButton.extended(
-                  heroTag: null,
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => ISS()),
-                    // );
-                  },
-                  backgroundColor: Colors.grey[800],
-                  icon: Icon(
-                    Icons.add_a_photo_outlined,
-                    color: Colors.green,
-                  ),
-                  label: Text(
-                    'New Tree',
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-              ],
+          floatingActionButton: FloatingActionButton.extended(
+            heroTag: null,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddTree()),
+              );
+            },
+            backgroundColor: Colors.grey[800],
+            icon: Icon(
+              Icons.add_a_photo_outlined,
+              color: Colors.green,
+            ),
+            label: Text(
+              'New Tree',
+              style: TextStyle(
+                fontFamily: 'Ubuntu',
+                color: Colors.green,
+              ),
             ),
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           backgroundColor: Colors.grey[900],
           appBar: AppBar(
             title: Text(

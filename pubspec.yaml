@@ -44,6 +44,9 @@ dev_dependencies:
   geolocator: ^6.1.14
   geocoding: ^1.0.5
   image_picker: ^0.6.7+14
+  uuid: ^2.2.2
+  path_provider: ^1.6.28
+  image: ^2.1.19
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
