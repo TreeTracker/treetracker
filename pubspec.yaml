@@ -47,6 +47,7 @@ dev_dependencies:
   uuid: ^2.2.2
   path_provider: ^1.6.28
   image: ^2.1.19
+  intl: ^0.16.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -8,10 +8,16 @@ import 'package:image/image.dart' as ImD;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(AddTree());
 }
+
+var ouruser = FirebaseAuth.instance.currentUser;
+var postReference = Firestore.instance.collection('Trees');
 
 class AddTree extends StatefulWidget {
   @override
@@ -41,6 +47,18 @@ class _AddTreeState extends State<AddTree> {
 
   displayUploadScreen() {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        backgroundColor: Colors.grey[800],
+        child: Icon(
+          Icons.navigate_before,
+          color: Colors.green,
+        ),
+      ),
+      backgroundColor: Colors.grey[900],
       body: Container(
         color: Colors.grey[900],
         child: Column(
@@ -52,11 +70,16 @@ class _AddTreeState extends State<AddTree> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: 20,
+                top: 50,
               ),
-              child: FlatButton(
-                onPressed: captureImage,
-                child: Text('Upload Image'),
+            ),
+            Container(
+              child: Center(
+                child: RaisedButton(
+                  onPressed: captureImage,
+                  child: Text('Click Picture'),
+                  color: Colors.green,
+                ),
               ),
             ),
           ],
@@ -99,6 +122,25 @@ class _AddTreeState extends State<AddTree> {
   //   print(imageString);
   //   return imageString;
   // }
+  saveToFireStore({String url, String lati, String longi, String nickname}) {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String currentDate = formatter.format(now);
+    postReference
+        .document(ouruser.uid)
+        .collection("userPosts")
+        .document(postID)
+        .setData({
+      "postID": postID,
+      "userID": ouruser.uid,
+      "postDate": currentDate,
+      "userName": ouruser.displayName,
+      "nickname": nickname,
+      "lat": lati,
+      "long": longi,
+      "url": url,
+    });
+  }
 
   controlUpload() async {
     setState(() {
@@ -114,12 +156,34 @@ class _AddTreeState extends State<AddTree> {
 
     final ref = FirebaseStorage().ref().child(imageLocation);
     var imageString = await ref.getDownloadURL();
-    print(imageString);
-    // var imageurl = uploadImage(file);
+    // print(lat);
+    // print(long);
+    // print(imageString);
+    // print(ouruser.displayName);
+    saveToFireStore(
+        url: imageString, lati: lat, longi: long, nickname: name.text);
+
+    name.clear();
+    setState(() {
+      file = null;
+      uploading = false;
+      postID = Uuid().v4();
+      lat = '';
+      long = '';
+    });
   }
 
   displayUploadForm() {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: clearPostInfo,
+        backgroundColor: Colors.grey[800],
+        child: Icon(
+          Icons.navigate_before,
+          color: Colors.green,
+        ),
+      ),
       appBar: AppBar(
         title: Text('Upload'),
         actions: [
@@ -131,6 +195,7 @@ class _AddTreeState extends State<AddTree> {
       ),
       body: ListView(
         children: <Widget>[
+          uploading ? LinearProgressIndicator() : Text(''),
           Container(
             height: 230,
             width: MediaQuery.of(context).size.width * 0.8,
@@ -193,9 +258,12 @@ class _AddTreeState extends State<AddTree> {
     );
   }
 
-  removeImage() {
+  clearPostInfo() {
+    name.clear();
     setState(() {
       file = null;
+      lat = "";
+      long = "";
     });
   }
 
