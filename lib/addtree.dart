@@ -174,7 +174,9 @@ class _AddTreeState extends State<AddTree> {
   }
 
   displayUploadForm() {
+    getCurrentLocation();
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: clearPostInfo,
@@ -185,13 +187,16 @@ class _AddTreeState extends State<AddTree> {
         ),
       ),
       appBar: AppBar(
-        title: Text('Upload'),
-        actions: [
-          FlatButton(
-            child: Text('Upload'),
-            onPressed: uploading ? null : () => controlUpload(),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.grey[800],
+        title: Text(
+          'Upload',
+          style: TextStyle(
+            fontFamily: 'Ubuntu',
+            color: Colors.green,
           ),
-        ],
+        ),
+        centerTitle: true,
       ),
       body: ListView(
         children: <Widget>[
@@ -220,9 +225,26 @@ class _AddTreeState extends State<AddTree> {
             title: Container(
               width: 250,
               child: TextField(
+                cursorColor: Colors.green,
                 controller: name,
                 decoration: InputDecoration(
-                  hintText: "Nickname",
+                  filled: true,
+                  fillColor: Colors.grey[700],
+                  focusColor: Colors.green,
+                  hoverColor: Colors.green,
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.nature_people),
+                  labelText: "Nickname",
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -231,26 +253,49 @@ class _AddTreeState extends State<AddTree> {
             padding: EdgeInsets.only(top: 10),
           ),
           ListTile(
-            leading: Icon(Icons.person_pin),
+            leading: Icon(
+              Icons.location_on,
+              color: Colors.white,
+            ),
             title: Container(
               width: 250,
-              child: Text(lat),
+              child: Text(
+                lat,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person_pin),
+            leading: Icon(
+              Icons.location_on,
+              color: Colors.white,
+            ),
             title: Container(
               width: 250,
-              child: Text(long),
+              child: Text(
+                long,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(top: 10),
           ),
-          RaisedButton(
-            onPressed: getCurrentLocation,
-            child: Text(
-              'Get Location',
+          Container(
+            child: Center(
+              child: RaisedButton(
+                onPressed: uploading ? null : () => controlUpload(),
+                color: Colors.green,
+                child: Text(
+                  'Upload',
+                ),
+              ),
             ),
           )
         ],
