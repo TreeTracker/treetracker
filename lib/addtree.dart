@@ -140,6 +140,8 @@ class _AddTreeState extends State<AddTree> {
       "long": longi,
       "url": url,
     });
+    postReference.document(postID).setData({"number": "1", "image1": url});
+    // postReference.document(postID).update({})
   }
 
   controlUpload() async {

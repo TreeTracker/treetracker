@@ -32,6 +32,22 @@ class _MyTreesState extends State<MyTrees> {
         .snapshots();
   }
 
+  showMaps() {
+    return Container(
+        child: Center(
+      child: Text('Show Google Maps'),
+    ));
+  }
+
+  testFunc() {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Text('LOL'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,11 +97,11 @@ class _MyTreesState extends State<MyTrees> {
             children: [
               Flexible(
                 flex: 3,
-                child: Center(
-                  child: Container(
-                    child: Text('Google Maps'),
-                  ),
-                ),
+                child: showMaps(),
+                // child: Center(
+                //   child: Container(
+                //     child: Text('Google Maps'),
+                //   ),
               ),
               Flexible(
                 flex: 2,
@@ -94,6 +110,10 @@ class _MyTreesState extends State<MyTrees> {
                   itemBuilder: (builder, index) {
                     final document = _data[index];
                     return ListTile(
+                      onTap: () {
+                        print(document.toString());
+                        testFunc();
+                      },
                       tileColor: Colors.grey[800],
                       leading: CircleAvatar(
                         backgroundColor: Colors.green,
@@ -141,9 +161,9 @@ class _MyTreesState extends State<MyTrees> {
 //   }
 // }
 
-class GMaps extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+// class GMaps extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
