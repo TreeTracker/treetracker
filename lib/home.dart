@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:treetracker/aboutus.dart';
 import 'package:treetracker/aqi.dart';
 import 'package:treetracker/climatechange.dart';
 import 'package:treetracker/mytrees.dart';
@@ -172,13 +173,18 @@ class _AppHomePageState extends State<AppHomePage> {
                       color: Colors.white,
                     ),
                     title: Text(
-                      'About Us',
+                      'Our Goal',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Ubuntu',
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AboutUs()),
+                      );
+                    },
                   ),
                   ListTile(
                     tileColor: Colors.grey[800],
