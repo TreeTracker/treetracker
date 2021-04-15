@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -32,22 +33,7 @@ class _MyTreesState extends State<MyTrees> {
         .snapshots();
   }
 
-  showMaps() {
-    return Container(
-        child: Center(
-      child: Text('Show Google Maps'),
-    ));
-  }
-
-  testFunc() {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Text('LOL'),
-      ),
-    );
-  }
-
+  final LatLng _center = const LatLng(19.0760, 72.8777);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +83,12 @@ class _MyTreesState extends State<MyTrees> {
             children: [
               Flexible(
                 flex: 3,
-                child: showMaps(),
+                child: GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: _center,
+                    zoom: 12,
+                  ),
+                ),
                 // child: Center(
                 //   child: Container(
                 //     child: Text('Google Maps'),
@@ -110,10 +101,7 @@ class _MyTreesState extends State<MyTrees> {
                   itemBuilder: (builder, index) {
                     final document = _data[index];
                     return ListTile(
-                      onTap: () {
-                        print(document.toString());
-                        testFunc();
-                      },
+                      onTap: () {},
                       tileColor: Colors.grey[800],
                       leading: CircleAvatar(
                         backgroundColor: Colors.green,

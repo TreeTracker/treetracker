@@ -32,6 +32,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   cupertino_icons: ^1.0.0
+  google_maps_flutter: ^1.0.3
   firebase_auth: ^0.18.3
   google_sign_in: ^4.5.6
   firebase_storage: ^5.0.1
