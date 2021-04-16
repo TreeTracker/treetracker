@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:treetracker/addtree.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -20,8 +21,8 @@ class MyTrees extends StatefulWidget {
 class _MyTreesState extends State<MyTrees> {
   Stream<QuerySnapshot> _myTrees;
   Marker marker;
-  var lati;
-  var longi;
+  GoogleMapController _controller;
+  final LatLng _center = const LatLng(19.0760, 72.8777);
 
   @override
   void initState() {
@@ -34,7 +35,6 @@ class _MyTreesState extends State<MyTrees> {
         .snapshots();
   }
 
-  final LatLng _center = const LatLng(19.0760, 72.8777);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,12 +73,87 @@ class _MyTreesState extends State<MyTrees> {
           }
           if (!snapshot.hasData) {
             return Center(
-              child: Text(
-                'Loading',
+              child: SizedBox(
+                height: 75,
+                width: 75,
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.green,
+                  strokeWidth: 7,
+                ),
               ),
             );
           }
           final treeCount = snapshot.data.docs.length;
+          print(treeCount);
+          if (treeCount == 0) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.grey[800],
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: ListTile(
+                        title: Text(
+                          "Oops! It looks like you don't have any Trees.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Ubuntu',
+                            fontSize: 25,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  color: Colors.grey[800],
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.grey[800],
+                      child: ListTile(
+                        subtitle: Text(
+                          'Get started by clicking on the Add Tree Button',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Ubuntu',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+                Container(
+                  child: Center(
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddTree()),
+                        );
+                      },
+                      color: Colors.green,
+                      child: Text(
+                        'Add Tree',
+                        style: TextStyle(
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          }
           final _data = snapshot.data.docs;
           // lati = double.parse(document['lat']);
           //             longi = double.parse(document['long']);
@@ -87,6 +162,9 @@ class _MyTreesState extends State<MyTrees> {
               Flexible(
                 flex: 3,
                 child: GoogleMap(
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller = controller;
+                  },
                   initialCameraPosition: CameraPosition(
                     target: _center,
                     zoom: 8,
@@ -137,6 +215,20 @@ class _MyTreesState extends State<MyTrees> {
                     // });
                     return ListTile(
                       onTap: () {},
+                      onLongPress: () async {
+                        _controller.animateCamera(
+                          CameraUpdate.newCameraPosition(
+                            new CameraPosition(
+                                bearing: 0,
+                                target: LatLng(
+                                  double.parse(document['lat']),
+                                  double.parse(document['long']),
+                                ),
+                                tilt: 0,
+                                zoom: 16.00),
+                          ),
+                        );
+                      },
                       tileColor: Colors.grey[800],
                       trailing: CircleAvatar(
                         backgroundColor: Colors.green,
