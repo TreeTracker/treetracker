@@ -7,19 +7,8 @@ void main() {
 class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          backgroundColor: Colors.grey[800],
-          child: Icon(
-            Icons.navigate_before,
-            color: Colors.green,
-          ),
-        ),
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Colors.grey[900],
         body: ListView(
           children: [

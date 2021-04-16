@@ -6,9 +6,7 @@ import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as ImD;
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
@@ -47,15 +45,16 @@ class _AddTreeState extends State<AddTree> {
 
   displayUploadScreen() {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
+      appBar: AppBar(
         backgroundColor: Colors.grey[800],
-        child: Icon(
-          Icons.navigate_before,
-          color: Colors.green,
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        title: Text(
+          'Add Tree',
+          style: TextStyle(
+            color: Colors.green,
+            fontFamily: 'Ubuntu',
+          ),
         ),
       ),
       backgroundColor: Colors.grey[900],
@@ -179,17 +178,8 @@ class _AddTreeState extends State<AddTree> {
     getCurrentLocation();
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: clearPostInfo,
-        backgroundColor: Colors.grey[800],
-        child: Icon(
-          Icons.navigate_before,
-          color: Colors.green,
-        ),
-      ),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.grey[800],
         title: Text(
           'Upload',

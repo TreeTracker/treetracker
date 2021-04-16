@@ -12,26 +12,16 @@ class Aqi extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            backgroundColor: Colors.grey[800],
-            child: Icon(
-              Icons.navigate_before,
-              color: Colors.green,
-            ),
-          ),
           backgroundColor: Colors.grey[900],
           appBar: AppBar(
-            // leading: IconButton(
-            //   icon: Icon(
-            //     Icons.arrow_back,
-            //     color: Colors.white,
-            //   ),
-            //   onPressed: () => Navigator.of(context).pop(),
-            // ),
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            automaticallyImplyLeading: true,
             title: Text(
               'AQI',
               style: TextStyle(

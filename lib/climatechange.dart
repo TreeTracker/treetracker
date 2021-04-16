@@ -47,17 +47,6 @@ class _ClimateChangeState extends State<ClimateChange> {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            backgroundColor: Colors.grey[800],
-            child: Icon(
-              Icons.navigate_before,
-              color: Colors.green,
-            ),
-          ),
           backgroundColor: Colors.grey[900],
           body: ListView(
             children: [

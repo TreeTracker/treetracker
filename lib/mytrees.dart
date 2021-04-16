@@ -39,22 +39,10 @@ class _MyTreesState extends State<MyTrees> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-          // print(_myTrees);
-        },
-        backgroundColor: Colors.grey[800],
-        child: Icon(
-          Icons.navigate_before,
-          color: Colors.green,
-        ),
-      ),
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: Text(
           'MyTrees',
           style: TextStyle(

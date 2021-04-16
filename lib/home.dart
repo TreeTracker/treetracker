@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:treetracker/aboutus.dart';
-import 'package:treetracker/aqi.dart';
 import 'package:treetracker/climatechange.dart';
 import 'package:treetracker/mytrees.dart';
 import 'package:treetracker/news.dart';
@@ -33,16 +32,6 @@ class _AppHomePageState extends State<AppHomePage> {
       setState(() {});
     });
   }
-
-  // @override
-  // void dispose() {
-  //   BackButtonInterceptor.remove(myInterceptor);
-  //   super.dispose();
-  // }
-
-  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-  //   return true;
-  // }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   DateTime currentBackPressTime;
@@ -113,15 +102,15 @@ class _AppHomePageState extends State<AppHomePage> {
             ),
             backgroundColor: Colors.grey[800],
             centerTitle: true,
-            actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.help_outline_rounded,
-                  // color: Colors.wh,
-                ),
-                onPressed: () {},
-              ),
-            ],
+            // actions: [
+            //   IconButton(
+            //     icon: Icon(
+            //       Icons.help_outline_rounded,
+            //       // color: Colors.wh,
+            //     ),
+            //     onPressed: () {},
+            //   ),
+            // ],
           ),
           drawer: Drawer(
             child: Container(
@@ -362,7 +351,7 @@ class _AppHomePageState extends State<AppHomePage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Aqii()),
+                          MaterialPageRoute(builder: (context) => Aqi()),
                         );
                       },
                       child: Container(
