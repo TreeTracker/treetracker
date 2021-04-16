@@ -1,5 +1,3 @@
-// import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +19,9 @@ class MyTrees extends StatefulWidget {
 
 class _MyTreesState extends State<MyTrees> {
   Stream<QuerySnapshot> _myTrees;
+  Marker marker;
+  var lati;
+  var longi;
 
   @override
   void initState() {
@@ -79,6 +80,8 @@ class _MyTreesState extends State<MyTrees> {
           }
           final treeCount = snapshot.data.docs.length;
           final _data = snapshot.data.docs;
+          // lati = double.parse(document['lat']);
+          //             longi = double.parse(document['long']);
           return Column(
             children: [
               Flexible(
@@ -86,24 +89,56 @@ class _MyTreesState extends State<MyTrees> {
                 child: GoogleMap(
                   initialCameraPosition: CameraPosition(
                     target: _center,
-                    zoom: 12,
+                    zoom: 8,
                   ),
+                  // markers: Set.of((marker != null) ? [marker] : []),
+                  markers: _data
+                      .map(
+                        (document) => Marker(
+                          markerId: MarkerId(document['postID']),
+                          position: LatLng(
+                            double.parse(document['lat']),
+                            double.parse(document['long']),
+                          ),
+                          infoWindow: InfoWindow(
+                            onTap: () {},
+                            title: document['nickname'],
+                            snippet: document['lat'] + '  ' + document['long'],
+                          ),
+                        ),
+                      )
+                      .toSet(),
                 ),
-                // child: Center(
-                //   child: Container(
-                //     child: Text('Google Maps'),
-                //   ),
               ),
+              // child: Center(
+              //   child: Container(
+              //     child: Text('Google Maps'),
+              //   ),
+              // ),
               Flexible(
                 flex: 2,
                 child: ListView.builder(
                   itemCount: _data.length,
                   itemBuilder: (builder, index) {
                     final document = _data[index];
+                    // setState(() {
+                    //   lati = double.parse(document['lat']);
+                    //   longi = double.parse(document['long']);
+                    //   marker = Marker(
+                    //       position: LatLng(
+                    //         lati,
+                    //         longi,
+                    //       ),
+                    //       markerId: MarkerId(document['postID']),
+                    //       icon: BitmapDescriptor.defaultMarker,
+                    //       infoWindow: InfoWindow(
+                    //         title: document['nickname'],
+                    //       ));
+                    // });
                     return ListTile(
                       onTap: () {},
                       tileColor: Colors.grey[800],
-                      leading: CircleAvatar(
+                      trailing: CircleAvatar(
                         backgroundColor: Colors.green,
                         backgroundImage: NetworkImage(document['url']),
                       ),
