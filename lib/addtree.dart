@@ -104,7 +104,7 @@ class _AddTreeState extends State<AddTree> {
     final path = tDirectory.path;
     ImD.Image mImageFile = ImD.decodeImage(file.readAsBytesSync());
     final compressedImageFile = File('$path/img_$postID.jpg')
-      ..writeAsBytesSync(ImD.encodeJpg(mImageFile, quality: 90));
+      ..writeAsBytesSync(ImD.encodeJpg(mImageFile, quality: 50));
     setState(() {
       file = compressedImageFile;
     });
@@ -149,6 +149,7 @@ class _AddTreeState extends State<AddTree> {
         .document('1')
         .setData({
       "image": url,
+      "postDate": currentDate,
     });
   }
 
@@ -201,7 +202,11 @@ class _AddTreeState extends State<AddTree> {
       ),
       body: ListView(
         children: <Widget>[
-          uploading ? LinearProgressIndicator() : Text(''),
+          uploading
+              ? LinearProgressIndicator(
+                  backgroundColor: Colors.green,
+                )
+              : Text(''),
           Container(
             height: 230,
             width: MediaQuery.of(context).size.width * 0.8,

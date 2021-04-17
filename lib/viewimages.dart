@@ -1,6 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:treetracker/addtree.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as ImD;
+import 'package:path_provider/path_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
 
 main() {
   runApp(
@@ -21,6 +27,11 @@ class ViewImages extends StatefulWidget {
 
 class _ViewImagesState extends State<ViewImages> {
   Stream<QuerySnapshot> _myTreePhotos;
+  File file;
+  bool uploading = false;
+  final name = DateTime.now();
+  var postReference = Firestore.instance.collection('Trees');
+
   @override
   void initState() {
     super.initState();
@@ -31,56 +42,139 @@ class _ViewImagesState extends State<ViewImages> {
         .document(widget.postID)
         .collection('allImages')
         .snapshots();
+    file = null;
   }
 
-  showImages() {
-    return StreamBuilder<QuerySnapshot>(
-      stream: _myTreePhotos,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text(snapshot.error),
-          );
-        }
-        if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              height: 75,
-              width: 75,
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.green,
-                strokeWidth: 7,
-              ),
-            ),
-          );
-        }
-        final _data = snapshot.data.docs;
-        print(_data);
-        return ListView.builder(
-            itemCount: _data.length,
-            itemBuilder: (builder, index) {
-              final document = _data[index];
-              print(document["image"]);
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
+  Future captureImage() async {
+    // Navigator.pop(context);
+    File imageFile = await ImagePicker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 680,
+      maxWidth: 970,
+    );
+    setState(() {
+      this.file = imageFile;
+    });
+  }
+
+  compressImage() async {
+    final tDirectory = await getTemporaryDirectory();
+    final path = tDirectory.path;
+    ImD.Image mImageFile = ImD.decodeImage(file.readAsBytesSync());
+    final compressedImageFile = File('$path/img_$name.jpg')
+      ..writeAsBytesSync(ImD.encodeJpg(mImageFile, quality: 50));
+    setState(() {
+      file = compressedImageFile;
+    });
+  }
+
+  saveToFireStore({String url}) {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String currentDate = formatter.format(now);
+    postReference
+        .document(ouruser.uid)
+        .collection("userPosts")
+        .document(widget.postID)
+        .collection('allImages')
+        .document(name.toString())
+        .setData({
+      "image": url,
+      "postDate": currentDate,
+    });
+  }
+
+  controlUpload() async {
+    setState(() {
+      uploading = true;
+    });
+    await compressImage();
+    String imageLocation = 'Trees/image$name.jpg';
+    final Reference storageReference =
+        FirebaseStorage().ref().child(imageLocation);
+    final UploadTask uploadTask = storageReference.putFile(file);
+    await uploadTask;
+    final ref = FirebaseStorage().ref().child(imageLocation);
+    var imageString = await ref.getDownloadURL();
+    saveToFireStore(url: imageString);
+    setState(() {
+      uploading = false;
+      file = null;
+    });
+  }
+
+  uploadForm() {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        backgroundColor: Colors.grey[800],
+        title: Text(
+          'Upload',
+          style: TextStyle(color: Colors.green),
+        ),
+      ),
+      backgroundColor: Colors.grey[900],
+      body: ListView(
+        children: [
+          uploading
+              ? LinearProgressIndicator(
+                  backgroundColor: Colors.green,
+                )
+              : Text(''),
+          Container(
+            height: 230,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Center(
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    color: Colors.grey[800],
-                    child: (Image.network(document["image"])),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: FileImage(file),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              );
-            });
-      },
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 10),
+          ),
+          Container(
+            child: Center(
+              child: RaisedButton(
+                onPressed: uploading ? null : () => controlUpload(),
+                color: Colors.green,
+                child: Text(
+                  'Upload',
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  showImages() {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
+      appBar: AppBar(
+        backgroundColor: Colors.grey[800],
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        title: Text(
+          widget.nickname,
+          style: TextStyle(
+            color: Colors.green,
+            fontFamily: 'Ubuntu',
+          ),
+        ),
+      ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: captureImage,
         icon: Icon(
           Icons.add_a_photo,
           color: Colors.green,
@@ -94,20 +188,51 @@ class _ViewImagesState extends State<ViewImages> {
           ),
         ),
       ),
-      appBar: AppBar(
-        backgroundColor: Colors.grey[800],
-        automaticallyImplyLeading: true,
-        centerTitle: true,
-        title: Text(
-          widget.nickname,
-          style: TextStyle(
-            color: Colors.green,
-            fontFamily: 'Ubuntu',
-          ),
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _myTreePhotos,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error),
+            );
+          }
+          if (!snapshot.hasData) {
+            return Center(
+              child: SizedBox(
+                height: 75,
+                width: 75,
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.green,
+                  strokeWidth: 7,
+                ),
+              ),
+            );
+          }
+          final _data = snapshot.data.docs;
+          print(_data);
+          return ListView.builder(
+              itemCount: _data.length,
+              itemBuilder: (builder, index) {
+                final document = _data[index];
+                print(document["image"]);
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      color: Colors.grey[800],
+                      child: (Image.network(document["image"])),
+                    ),
+                  ),
+                );
+              });
+        },
       ),
-      backgroundColor: Colors.grey[900],
-      body: showImages(),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return file == null ? showImages() : uploadForm();
   }
 }
