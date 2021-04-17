@@ -16,6 +16,7 @@ void main() {
 
 var ouruser = FirebaseAuth.instance.currentUser;
 var postReference = Firestore.instance.collection('Trees');
+// var photoReference = Firestore.instance.collection('All Images');
 
 class AddTree extends StatefulWidget {
   @override
@@ -138,9 +139,17 @@ class _AddTreeState extends State<AddTree> {
       "lat": lati,
       "long": longi,
       "url": url,
+      // "image1": url,
     });
-    postReference.document(postID).setData({"number": "1", "image1": url});
-    // postReference.document(postID).update({})
+    postReference
+        .document(ouruser.uid)
+        .collection("userPosts")
+        .document(postID)
+        .collection('allImages')
+        .document('1')
+        .setData({
+      "image": url,
+    });
   }
 
   controlUpload() async {

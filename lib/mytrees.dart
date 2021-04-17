@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:treetracker/addtree.dart';
+import 'viewimages.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -11,7 +11,6 @@ void main() {
 }
 
 var postReference = Firestore.instance.collection('Trees');
-var ouruser = FirebaseAuth.instance.currentUser;
 
 class MyTrees extends StatefulWidget {
   @override
@@ -167,7 +166,17 @@ class _MyTreesState extends State<MyTrees> {
                             double.parse(document['long']),
                           ),
                           infoWindow: InfoWindow(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => ViewImages(
+                                    nickname: document['nickname'],
+                                    postID: document['postID'],
+                                  ),
+                                ),
+                              );
+                            },
                             title: document['nickname'],
                             snippet: document['lat'] + '  ' + document['long'],
                           ),
@@ -202,7 +211,17 @@ class _MyTreesState extends State<MyTrees> {
                     //       ));
                     // });
                     return ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ViewImages(
+                              nickname: document['nickname'],
+                              postID: document['postID'],
+                            ),
+                          ),
+                        );
+                      },
                       onLongPress: () async {
                         _controller.animateCamera(
                           CameraUpdate.newCameraPosition(
@@ -248,6 +267,12 @@ class _MyTreesState extends State<MyTrees> {
   }
 }
 
+// class Tree {
+//   final String nickname;
+//   final String postID;
+
+//   Tree(this.nickname, this.postID);
+// }
 // class TreeList extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
