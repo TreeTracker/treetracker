@@ -161,6 +161,10 @@ class _AddTreeState extends State<AddTree> {
     saveToFireStore(
         url: imageString, lati: lat, longi: long, nickname: name.text);
 
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => _buildPopupDialog(context),
+    );
     name.clear();
     setState(() {
       file = null;
@@ -308,5 +312,53 @@ class _AddTreeState extends State<AddTree> {
   @override
   Widget build(BuildContext context) {
     return file == null ? displayUploadScreen() : displayUploadForm();
+  }
+
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      backgroundColor: Colors.grey[900],
+      title: const Text(
+        'Hooray!!',
+        style: TextStyle(
+          fontFamily: 'Ubuntu',
+          color: Colors.green,
+        ),
+      ),
+      // content: new Text('Your Tree was added'),
+      content: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset('assets/images/tenor.gif'),
+            Padding(
+              padding: EdgeInsets.only(top: 20.0),
+            ),
+            Text(
+              'You Just Added a Tree!',
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.black,
+          color: Colors.green,
+          child: const Text(
+            'Okay',
+            style: TextStyle(
+              fontFamily: 'Ubuntu',
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
