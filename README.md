@@ -16,9 +16,7 @@ The goal of this project is to form a connection with trees making us liable for
 
 <h2>Our Solution</h2>
 
-This is an app-based project. Which will be able to capture images of trees using the phone’s camera. After capturing the image, the user will be able to give that tree a pet or nickname and then the app will store that in Firebase. Along with that it will also store the location or the PlusCode of the area where the image has been captured. 
-Every month the user will get a notification to go and check on that tree and then he will be able to update the picture of that tree and store it back again.
-This way the user will be given updates about the tree and the importance of forests, updates on climate change etc.
+This is an app-based project. Which will be able to capture images of trees using the phone’s camera. After capturing the image, the user will be able to give that tree a pet or nickname and then the app will store that in Firebase. Along with that, it will also store the location or the PlusCode of the area where the image has been captured. Every month user has to update the picture of the tree. This way the user will be given updates about the trees and the importance of forests, updates on climate change, etc. 
 
 <h2>Purpose</h2>
 
