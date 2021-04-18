@@ -1,15 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:treetracker/auth.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:treetracker/home.dart';
 import 'package:treetracker/login.dart';
 
-import 'homescreen.dart';
+// import 'homescreen.dart';
 
 class Start extends StatelessWidget {
   @override
