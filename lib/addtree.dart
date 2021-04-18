@@ -16,7 +16,6 @@ void main() {
 
 var ouruser = FirebaseAuth.instance.currentUser;
 var postReference = Firestore.instance.collection('Trees');
-// var photoReference = Firestore.instance.collection('All Images');
 
 class AddTree extends StatefulWidget {
   @override
@@ -110,18 +109,6 @@ class _AddTreeState extends State<AddTree> {
     });
   }
 
-  // Future<String> uploadImage(mImageFile) async {
-  //   String imageLocation = 'Trees/image$postID.jpg';
-  //   final Reference storageReference =
-  //       FirebaseStorage().ref().child(imageLocation);
-  //   final UploadTask uploadTask = storageReference.putFile(mImageFile);
-  //   await uploadTask;
-
-  //   final ref = FirebaseStorage().ref().child(imageLocation);
-  //   var imageString = await ref.getDownloadURL();
-  //   print(imageString);
-  //   return imageString;
-  // }
   saveToFireStore({String url, String lati, String longi, String nickname}) {
     var now = new DateTime.now();
     var formatter = new DateFormat('yyyy-MM-dd');

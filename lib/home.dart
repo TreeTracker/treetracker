@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:treetracker/aboutus.dart';
+import 'package:treetracker/aqi.dart';
 import 'package:treetracker/climatechange.dart';
 import 'package:treetracker/mytrees.dart';
 import 'package:treetracker/news.dart';
 import 'package:treetracker/weather.dart';
-import 'AqiApiHandling/aqi.dart';
 import 'addtree.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -351,7 +351,7 @@ class _AppHomePageState extends State<AppHomePage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Aqi()),
+                          MaterialPageRoute(builder: (context) => Aqii()),
                         );
                       },
                       child: Container(
@@ -395,14 +395,6 @@ class _AppHomePageState extends State<AppHomePage> {
                             ),
                           ],
                         ),
-                        // child: Text(
-                        //   'AQI',
-                        //   textAlign: TextAlign.center,
-                        //   style: TextStyle(
-                        //     fontSize: 25,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
                       ),
                     ),
                   ),
@@ -461,14 +453,6 @@ class _AppHomePageState extends State<AppHomePage> {
                         ),
                       ],
                     ),
-                    // child: Text(
-                    //   'News',
-                    //   textAlign: TextAlign.center,
-                    //   style: TextStyle(
-                    //     fontSize: 25,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
                   ),
                 ),
               ),
