@@ -44,299 +44,286 @@ class _ClimateChangeState extends State<ClimateChange> {
       'The most important way to help this Unsurmountable crisis we face as a species is to TALK ABOUT IT!!!!! Why do you think we are stuck here anyways, Our governments make fake promises, don’t fulfill their part and next year the cycle repeats.It must feel suffocating but let me completely dispel your argument about you just doing your part and making it all better, it may help you conscience but the scale of this crisis is bigger than you and me. If someone can solve this, it’s our government. No one else. They are the only ones who have the money, the power and legislation to make it happen. And for them to take it seriously, we have to. Make it an important topic of debate during elections, ask for your right to live frightfree for you, your children and everyone else. People still haven’t taken Climate change seriously and its upto you to make your peers understand this crisis. You can participate in Protests and be part of groups which voice their opinions actively and ask for climate justice. You can use the browser Ecosia as your default search engine, they plant trees every time you search using them. You can Donate to NGOs which work to save the planet relentlessly everyday.';
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.grey[900],
-          body: ListView(
-            children: [
-              Image(
-                image: AssetImage(
-                  'assets/images/climate.jpg',
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      'Climate Change',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 25,
-                        color: Colors.green,
-                      ),
-                    ),
-                    // subtitle: Text(
-                    //   'LOL',
-                    //   style:
-                    //       TextStyle(color: Colors.white, fontFamily: 'Ubuntu'),
-                    // ),
-                  ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title1,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text1 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage(
-                  'assets/images/earthheating.jpg',
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title2,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text2 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/earthheating2.jpg'),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title3,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text3 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/heat.jpg'),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title4,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text4 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/greenhouse.jpg'),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title5,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text5 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/greenhouse2.jpg'),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title6,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text6 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/heat2.jpg'),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title7,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text7 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/survive.jpg'),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title8,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text8 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/exe.jpg'),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Card(
-                  color: Colors.grey[800],
-                  child: ListTile(
-                    title: Text(
-                      title9,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 19,
-                        color: Colors.green,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '\n' + text9 + '\n',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Image(
-                image: AssetImage('assets/images/talk.png'),
-              ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.grey[800],
+        title: Text(
+          'Climate Change',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Ubuntu',
+            color: Colors.green,
           ),
         ),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.grey[900],
+      body: ListView(
+        children: [
+          Image(
+            image: AssetImage(
+              'assets/images/climate.jpg',
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text1 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage(
+              'assets/images/earthheating.jpg',
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text2 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/earthheating2.jpg'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title3,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text3 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/heat.jpg'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title4,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text4 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/greenhouse.jpg'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title5,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text5 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/greenhouse2.jpg'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title6,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text6 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/heat2.jpg'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title7,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text7 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/survive.jpg'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title8,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text8 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/exe.jpg'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Colors.grey[800],
+              child: ListTile(
+                title: Text(
+                  title9,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 19,
+                    color: Colors.green,
+                  ),
+                ),
+                subtitle: Text(
+                  '\n' + text9 + '\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage('assets/images/talk.png'),
+          ),
+        ],
       ),
     );
   }

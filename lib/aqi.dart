@@ -98,18 +98,19 @@ class _AqiState extends State<Aqii> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          backgroundColor: Colors.grey[800],
-          child: Icon(
-            Icons.navigate_before,
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.grey[800],
+        title: Text(
+          'AQI',
+          style: TextStyle(
             color: Colors.green,
+            fontFamily: 'Ubuntu',
           ),
         ),
-      backgroundColor: Colors.transparent,
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.grey[900],
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
