@@ -32,6 +32,54 @@ class _ViewImagesState extends State<ViewImages> {
   final name = DateTime.now();
   var postReference = Firestore.instance.collection('Trees');
 
+  Widget _buildPopupDialog(BuildContext context) {
+    return new AlertDialog(
+      backgroundColor: Colors.grey[900],
+      title: const Text(
+        'Success',
+        style: TextStyle(
+          fontFamily: 'Ubuntu',
+          color: Colors.green,
+        ),
+      ),
+      // content: new Text('Your Tree was added'),
+      content: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset('assets/images/smile.gif'),
+            Padding(
+              padding: EdgeInsets.only(top: 20.0),
+            ),
+            Text(
+              'You Just Updated the image of your Tree!',
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Colors.black,
+          color: Colors.green,
+          child: const Text(
+            'Okay',
+            style: TextStyle(
+              fontFamily: 'Ubuntu',
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -97,6 +145,10 @@ class _ViewImagesState extends State<ViewImages> {
     final ref = FirebaseStorage().ref().child(imageLocation);
     var imageString = await ref.getDownloadURL();
     saveToFireStore(url: imageString);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => _buildPopupDialog(context),
+    );
     setState(() {
       uploading = false;
       file = null;
