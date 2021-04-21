@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:sign_button/sign_button.dart';
 
 import 'auth.dart';
 
@@ -44,17 +44,20 @@ class LoginApp extends StatelessWidget {
                             fontSize: 40,
                             fontFamily: 'Ubuntu',
                           )),
-                      Padding(padding: EdgeInsets.all(40)),
-                      ClipRRect(
-                        child: Container(child: GoogleSignInButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Auth()),
-                            );
-                          },
-                        )),
+                      SizedBox(
+                        height: 80.0,
                       ),
+                      Container(
+                          child: SignInButton(
+                              buttonType: ButtonType.google,
+                              buttonSize: ButtonSize.medium,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Auth()),
+                                );
+                              }))
                     ],
                   ),
                 ),

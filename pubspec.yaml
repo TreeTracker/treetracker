@@ -50,6 +50,8 @@ dev_dependencies:
   image: ^2.1.19
   intl: ^0.16.1
   webview_flutter: ^0.1.1
+  sign_button: ^1.0.2
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
