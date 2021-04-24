@@ -63,40 +63,46 @@ class _AppHomePageState extends State<AppHomePage> {
               fontFamily: 'Ubuntu',
             ),
           ),
+          Padding(
+            padding: EdgeInsets.all(10),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Colors.brown,
+                child: Text(
+                  'Okay',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Clipboard.setData(
+                      new ClipboardData(text: "treetrackerorg@gmail.com"));
+                  _scaffoldKey.currentState.showSnackBar(
+                      new SnackBar(content: new Text('E-Mail Copied')));
+                  Navigator.pop(context);
+                },
+                color: Colors.green,
+                child: Text(
+                  'Copy EMail',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
-      actions: [
-        FlatButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Colors.brown,
-          child: Text(
-            'Okay',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Ubuntu',
-            ),
-          ),
-        ),
-        FlatButton(
-          onPressed: () {
-            Clipboard.setData(
-                new ClipboardData(text: "treetrackerorg@gmail.com"));
-            _scaffoldKey.currentState
-                .showSnackBar(new SnackBar(content: new Text('E-Mail Copied')));
-            Navigator.pop(context);
-          },
-          color: Colors.green,
-          child: Text(
-            'Copy EMail to Clipboard',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Ubuntu',
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -122,37 +128,36 @@ class _AppHomePageState extends State<AppHomePage> {
             backgroundColor: Colors.green,
             radius: 45,
             backgroundImage: NetworkImage(ouruser.photoURL),
-          )
-        ],
-      ),
-      actions: [
-        FlatButton(
-          color: Colors.green,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Auth()),
-            );
-          },
-          child: Row(
+          ),
+          Padding(
+            padding: EdgeInsets.all(6),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.logout,
-              ),
-              Padding(
-                padding: EdgeInsets.all(2),
-              ),
-              Text(
-                'Sign Out',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Ubunutu',
+              RaisedButton(
+                color: Colors.green,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Auth()),
+                  );
+                },
+                child: Text(
+                  'Sign Out',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubunutu',
+                  ),
                 ),
               ),
             ],
           ),
-        )
-      ],
+          Padding(
+            padding: EdgeInsets.all(6),
+          ),
+        ],
+      ),
     );
   }
 
@@ -389,7 +394,7 @@ class _AppHomePageState extends State<AppHomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Aqi()),
+                        MaterialPageRoute(builder: (context) => Aqii()),
                       );
                     },
                     child: Container(
