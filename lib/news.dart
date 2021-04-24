@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:async';
+import 'dart:io';
 
 void main() {
   runApp(MaterialApp(
@@ -14,8 +14,13 @@ class NewsWebView extends StatefulWidget {
 }
 
 class _NewsWebViewState extends State<NewsWebView> {
-  Completer<WebViewController> _controller = Completer<WebViewController>();
   var _url = 'https://www.google.com/search?q=climate+change&tbm=nws';
+
+  void initState() {
+    super.initState();
+    // Enable hybrid composition.
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +39,6 @@ class _NewsWebViewState extends State<NewsWebView> {
       ),
       body: WebView(
         initialUrl: _url,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
-        },
       ),
     );
   }
