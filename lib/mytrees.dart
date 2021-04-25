@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:treetracker/addtree.dart';
 import 'viewimages.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -27,11 +28,23 @@ class _MyTreesState extends State<MyTrees> {
   void initState() {
     super.initState();
 
+    BackButtonInterceptor.add(myInterceptor);
     _myTrees = Firestore.instance
         .collection('Trees')
         .document(ouruser.uid)
         .collection("userPosts")
         .snapshots();
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Navigator.of(context).pop(); // Do some stuff.
+    return true;
   }
 
   @override
@@ -41,7 +54,14 @@ class _MyTreesState extends State<MyTrees> {
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
         centerTitle: true,
-        automaticallyImplyLeading: true,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text(
           'MyTrees',
           style: TextStyle(
