@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'dart:io';
 
 void main() {
@@ -20,13 +21,36 @@ class _NewsWebViewState extends State<NewsWebView> {
     super.initState();
     // Enable hybrid composition.
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => AppHomePage()),
+    // ); // Do some stuff.
+    Navigator.of(context).pop();
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         centerTitle: true,
         backgroundColor: Colors.grey[800],
         title: Text(

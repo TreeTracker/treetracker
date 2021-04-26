@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as ImD;
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:intl/intl.dart';
 
 main() {
@@ -91,6 +92,18 @@ class _ViewImagesState extends State<ViewImages> {
         .collection('allImages')
         .snapshots();
     file = null;
+
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    return true;
   }
 
   Future captureImage() async {
@@ -158,7 +171,14 @@ class _ViewImagesState extends State<ViewImages> {
   uploadForm() {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         centerTitle: true,
         backgroundColor: Colors.grey[800],
         title: Text(

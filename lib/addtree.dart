@@ -8,6 +8,7 @@ import 'package:image/image.dart' as ImD;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -31,6 +32,22 @@ class _AddTreeState extends State<AddTree> {
   TextEditingController name = TextEditingController();
   TextEditingController location = TextEditingController();
 
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Navigator.of(context).pop(); // Do some stuff.
+    return true;
+  }
+
   Future captureImage() async {
     // Navigator.pop(context);
     File imageFile = await ImagePicker.pickImage(
@@ -47,7 +64,14 @@ class _AddTreeState extends State<AddTree> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
-        automaticallyImplyLeading: true,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         centerTitle: true,
         title: Text(
           'Add Tree',
@@ -180,7 +204,14 @@ class _AddTreeState extends State<AddTree> {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         backgroundColor: Colors.grey[800],
         title: Text(
           'Upload',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main() => runApp(WeatherApp());
 
@@ -25,6 +26,18 @@ class _WeatherAppState extends State<WeatherApp> {
   initState() {
     super.initState();
     fetchLocation();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Navigator.of(context).pop(); // Do some stuff.
+    return true;
   }
 
   void fetchSearch(String input) async {
@@ -68,7 +81,14 @@ class _WeatherAppState extends State<WeatherApp> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[800],
-        automaticallyImplyLeading: true,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text(
           'Weather',
           style: TextStyle(

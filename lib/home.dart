@@ -10,6 +10,7 @@ import 'addtree.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main(List<String> args) {
   runApp(
@@ -28,10 +29,89 @@ class _AppHomePageState extends State<AppHomePage> {
   @override
   void initState() {
     super.initState();
-    // BackButtonInterceptor.add(myInterceptor);
+    BackButtonInterceptor.add(myInterceptor);
     FirebaseAuth.instance.authStateChanges().listen((user) {
       setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    // Navigator.of(context).pop(); // Do some stuff.
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) => _buildExitDiolog(context),
+    // );
+    // print('Home Back Button pressed');
+
+    return true;
+  }
+
+  Widget _buildExitDiolog(BuildContext context) {
+    return new AlertDialog(
+      backgroundColor: Colors.grey[900],
+      title: Text(
+        'Exit',
+        style: TextStyle(
+          fontFamily: 'Ubuntu',
+          color: Colors.green,
+        ),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(10),
+          ),
+          Text(
+            'Are You Sure You Want to Exit?',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Ubuntu',
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(10),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Colors.brown,
+                child: Text(
+                  'No',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  exit(0);
+                },
+                color: Colors.green,
+                child: Text(
+                  'Yes',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   Widget _buildHelpDiolog(BuildContext context) {
@@ -230,13 +310,13 @@ class _AppHomePageState extends State<AppHomePage> {
           centerTitle: true,
           leading: IconButton(
             icon: Icon(
-              Icons.help_outline_rounded,
+              Icons.exit_to_app,
               color: Colors.white,
             ),
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (BuildContext context) => _buildHelpDiolog(context),
+                builder: (BuildContext context) => _buildExitDiolog(context),
               );
             },
           ),

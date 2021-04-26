@@ -44,6 +44,7 @@ class _MyTreesState extends State<MyTrees> {
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
     Navigator.of(context).pop(); // Do some stuff.
+
     return true;
   }
 

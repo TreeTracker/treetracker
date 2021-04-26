@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'dart:io';
 
 void main() {
@@ -79,6 +80,18 @@ class _AqiState extends State<Aqii> {
   void initState() {
     super.initState();
     this.getAqi(urls);
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Navigator.of(context).pop(); // Do some stuff.
+    return true;
   }
 
   var urlc;
@@ -99,7 +112,14 @@ class _AqiState extends State<Aqii> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        // automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         backgroundColor: Colors.grey[800],
         title: Text(
           'AQI',
