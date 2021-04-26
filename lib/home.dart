@@ -1,16 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:treetracker/aqi.dart';
 import 'package:treetracker/climatechange.dart';
 import 'package:treetracker/mytrees.dart';
 import 'package:treetracker/news.dart';
 import 'package:treetracker/weather.dart';
-import 'AqiApiHandling/aqi.dart';
 import 'addtree.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'pollution.dart';
 
 void main(List<String> args) {
   runApp(
@@ -474,7 +473,7 @@ class _AppHomePageState extends State<AppHomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Aqii()),
+                        MaterialPageRoute(builder: (context) => AqiApp()),
                       );
                     },
                     child: Container(
