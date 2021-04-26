@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 main(List<String> args) {
   runApp(
@@ -26,8 +27,20 @@ var status;
 class _AqiAppState extends State<AqiApp> {
   void initState() {
     super.initState();
+    BackButtonInterceptor.add(myInterceptor);
     Aqi = null;
     data();
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Navigator.of(context).pop();
+    return true;
   }
 
   var _currentCords;
@@ -65,7 +78,7 @@ class _AqiAppState extends State<AqiApp> {
   data() async {
     await _getCurrentLocation();
     _getAddressFromLatLng();
-    var key = "ce0fec27a9435b19b436f5262f9ec86c";
+    var key = "";
     var url =
         "http://api.openweathermap.org/data/2.5/air_pollution?lat=$lat&lon=$long&appid=$key";
     var response = await http.get(url);
