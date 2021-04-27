@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:treetracker/climatechange.dart';
 import 'package:treetracker/mytrees.dart';
 import 'package:treetracker/news.dart';
-import 'package:treetracker/weather.dart';
+import 'package:treetracker/temperature.dart';
 import 'addtree.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
