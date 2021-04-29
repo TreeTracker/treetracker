@@ -7,9 +7,25 @@ void main() {
 class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return MaterialApp(
+      home: Scaffold(
         backgroundColor: Colors.grey[900],
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            tooltip: 'Back',
+            onPressed: () {},
+          ),
+          title: Text(
+            'About Us',
+            style: TextStyle(
+              color: Colors.green,
+              fontFamily: 'Ubuntu',
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.grey[800],
+        ),
         body: ListView(
           children: [
             // Image(

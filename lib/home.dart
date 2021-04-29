@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:treetracker/aboutus.dart';
 import 'package:treetracker/climatechange.dart';
+import 'package:treetracker/help.dart';
 import 'package:treetracker/mytrees.dart';
 import 'package:treetracker/news.dart';
 import 'package:treetracker/temperature.dart';
@@ -644,10 +645,10 @@ class _AppHomePageState extends State<AppHomePage> {
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => AqiApp()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Helppage()),
+                      );
                     },
                     child: Container(
                       width: (MediaQuery.of(context).size.width / 2) - 35,
