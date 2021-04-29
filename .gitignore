@@ -43,3 +43,7 @@ app.*.map.json
 
 # Firebase JSON File
 android/app/google-services.json
+
+
+# fILES USED DIFFRENT VERSIONS ON DIFFRENT PC 
+android/gradle/wrapper/gradle-wrapper.properties

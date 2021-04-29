@@ -32,12 +32,28 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   cupertino_icons: ^1.0.0
+  google_maps_flutter: ^1.0.3
   firebase_auth: ^0.18.3
   google_sign_in: ^4.5.6
+  firebase_storage: ^5.0.1
   firebase_core: ^0.5.2
   flutter_auth_buttons: ^0.10.0
   back_button_interceptor: ^4.4.1
   http: ^0.12.2
+  firebase_database: ^4.4.0
+  cloud_firestore: ^0.14.4
+  geolocator: ^6.1.14
+  geocoding: ^1.0.5
+  image_picker: ^0.6.7+14
+  uuid: ^2.2.2
+  path_provider: ^1.6.28
+  image: ^2.1.19
+  intl: ^0.16.1
+  webview_flutter: ^1.0.7
+  sign_button: ^1.0.2
+  url_launcher: ^5.7.10
+  
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
