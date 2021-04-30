@@ -1,4 +1,4 @@
-package com.example.treetracker
+package com.treetracker.app
 
 import io.flutter.embedding.android.FlutterActivity
 
