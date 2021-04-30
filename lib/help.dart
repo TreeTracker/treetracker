@@ -62,7 +62,7 @@ class _HelppageState extends State<Helppage> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
             tooltip: 'Back',
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
             'Help',

@@ -605,7 +605,7 @@ class _AppHomePageState extends State<AppHomePage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(25),
                               child: Image.asset(
-                                'assets/images/aboutus.jpg',
+                                'assets/images/goals.jpg',
                                 width: 5000,
                                 height: 5000,
                                 fit: BoxFit.fill,
@@ -618,7 +618,7 @@ class _AppHomePageState extends State<AppHomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 // Text(
-                                //   'About Us',
+                                //   'Goals',
                                 //   textAlign: TextAlign.center,
                                 //   style: TextStyle(
                                 //     fontSize: 25,

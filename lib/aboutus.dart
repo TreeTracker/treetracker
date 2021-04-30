@@ -14,10 +14,10 @@ class AboutUs extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
             tooltip: 'Back',
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
-            'About Us',
+            'Our Goal',
             style: TextStyle(
               color: Colors.green,
               fontFamily: 'Ubuntu',
@@ -31,22 +31,6 @@ class AboutUs extends StatelessWidget {
             // Image(
             //   image: AssetImage('assets/images/tree2.png'),
             // ),
-            Container(
-              child: Card(
-                child: ListTile(
-                  tileColor: Colors.grey[800],
-                  title: Text(
-                    "Our Goal",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontSize: 25,
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-              ),
-            ),
             Container(
               child: Card(
                 child: ListTile(
