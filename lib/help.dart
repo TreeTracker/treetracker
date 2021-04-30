@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main() {
   runApp(Helppage());
@@ -12,6 +13,23 @@ class Helppage extends StatefulWidget {
 
 class _HelppageState extends State<Helppage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Navigator.of(context).pop();
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
