@@ -8,7 +8,9 @@ As deforestation has ramped up, Earth’s climate has changed significantly. War
 
 <h2>App Download </h2>
 
-App coming soon on Google Play Store
+<a href='https://play.google.com/store/apps/details?id=com.treetracker.app'>
+<img src = './README/badge.png' height=70 >
+</a>
 
 <h2>The Problem</h2>
 
