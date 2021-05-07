@@ -50,7 +50,7 @@ dev_dependencies:
   image: ^2.1.19
   intl: ^0.16.1
   webview_flutter: ^1.0.7
-  sign_button: ^1.0.2
+  flutter_signin_button: ^2.0.0
   url_launcher: ^5.7.10
   change_app_package_name: ^0.1.3
 

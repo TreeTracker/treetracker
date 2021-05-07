@@ -56,31 +56,22 @@ class _BootScreenState extends State<BootScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(
-              image: AssetImage('assets/images/tree2.png'),
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
-            ),
-            Text(
-              'TreeTracker',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Ubuntu',
-                fontSize: 25,
+            Flexible(
+              flex: 1,
+              child: Image.asset(
+                'assets/images/tree2.png',
+                height: 160,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(40),
             ),
             SizedBox(
-              height: 25,
-              width: 25,
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.brown,
-                strokeWidth: 3,
-              ),
-            )
+              height: 20.0,
+            ),
+            Text("Tree Tracker",
+                style: TextStyle(
+                  color: Colors.green.shade500,
+                  fontSize: 40,
+                  fontFamily: 'Ubuntu',
+                )),
           ],
         ),
       ),

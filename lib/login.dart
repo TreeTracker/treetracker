@@ -1,9 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:sign_button/sign_button.dart';
-
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'auth.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: LoginApp(),
+  ));
+}
 
 class LoginApp extends StatelessWidget {
   @override
@@ -47,17 +51,19 @@ class LoginApp extends StatelessWidget {
                       SizedBox(
                         height: 80.0,
                       ),
-                      Container(
+                      Center(
+                        child: Container(
                           child: SignInButton(
-                              buttonType: ButtonType.google,
-                              buttonSize: ButtonSize.medium,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Auth()),
-                                );
-                              }))
+                            Buttons.GoogleDark,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Auth()),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
