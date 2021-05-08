@@ -19,8 +19,7 @@ class _HelppageState extends State<Helppage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.grey[900],
         body: Stack(children: [
@@ -79,7 +78,7 @@ class _HelppageState extends State<Helppage> {
           centerTitle: true,
           backgroundColor: Colors.grey[800],
         ),
-      ),
+      
     );
   }
 }

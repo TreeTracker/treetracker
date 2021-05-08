@@ -261,8 +261,7 @@ class _ViewImagesState extends State<ViewImages> {
                 height: 75,
                 width: 75,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.green,
-                  strokeWidth: 7,
+                  strokeWidth: 6,
                 ),
               ),
             );

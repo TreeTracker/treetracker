@@ -115,7 +115,6 @@ class _WeatherAppState extends State<WeatherApp> {
                 height: 55,
                 width: 55,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.green,
                   strokeWidth: 5,
                 ),
               ),

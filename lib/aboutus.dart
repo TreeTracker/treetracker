@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main() {
   runApp(AboutUs());

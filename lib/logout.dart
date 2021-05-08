@@ -1,7 +1,11 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'dart:async';
+
+void main() {
+  runApp(Logout());
+}
 
 class Logout extends StatelessWidget {
   @override
@@ -35,18 +39,22 @@ class _LogoutScreenState extends State<LogoutScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(
-              image: AssetImage('assets/images/tree2.png'),
+            Flexible(
+              flex: 1,
+              child: Image.asset(
+                'assets/images/tree2.png',
+                height: 160,
+              ),
             ),
-            Padding(
-              padding: EdgeInsets.all(20),
+            SizedBox(
+              height: 40.0,
             ),
             Text(
-              'Logged Out',
+              "Signing Out",
               style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Ubuntu',
+                color: Colors.green.shade500,
                 fontSize: 25,
+                fontFamily: 'Ubuntu',
               ),
             ),
             Padding(
@@ -56,7 +64,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
               height: 25,
               width: 25,
               child: CircularProgressIndicator(
-                backgroundColor: Colors.brown,
+                // backgroundColor: Colors.brown,
                 strokeWidth: 3,
               ),
             )

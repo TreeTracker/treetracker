@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:treetracker/home.dart';
@@ -13,7 +12,7 @@ class Start extends StatelessWidget {
     return MaterialApp(
       home: BootScreen(),
       theme: ThemeData(
-        primaryColor: Colors.green,
+        primarySwatch: Colors.green,
       ),
     );
   }
@@ -66,12 +65,25 @@ class _BootScreenState extends State<BootScreen> {
             SizedBox(
               height: 20.0,
             ),
-            Text("Tree Tracker",
-                style: TextStyle(
-                  color: Colors.green.shade500,
-                  fontSize: 40,
-                  fontFamily: 'Ubuntu',
-                )),
+            Text(
+              "Tree Tracker",
+              style: TextStyle(
+                color: Colors.green.shade500,
+                fontSize: 40,
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(40),
+            ),
+            SizedBox(
+              height: 25,
+              width: 25,
+              child: CircularProgressIndicator(
+                // backgroundColor: Colors.brown,
+                strokeWidth: 3,
+              ),
+            )
           ],
         ),
       ),

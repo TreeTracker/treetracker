@@ -141,7 +141,6 @@ class _AqiAppState extends State<AqiApp> {
                 height: 55,
                 width: 55,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.green,
                   strokeWidth: 5,
                 ),
               ),

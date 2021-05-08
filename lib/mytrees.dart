@@ -70,8 +70,7 @@ class _MyTreesState extends State<MyTrees> {
                 height: 75,
                 width: 75,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.green,
-                  strokeWidth: 7,
+                  strokeWidth: 6,
                 ),
               ),
             );
