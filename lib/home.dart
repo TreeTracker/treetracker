@@ -10,7 +10,6 @@ import 'addtree.dart';
 import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'pollution.dart';
 
 void main(List<String> args) {
@@ -35,23 +34,6 @@ class _AppHomePageState extends State<AppHomePage> {
       setState(() {});
     });
   }
-
-  // @override
-  // void dispose() {
-  //   BackButtonInterceptor.remove(myInterceptor);
-  //   super.dispose();
-  // }
-
-  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-  //   // Navigator.of(context).pop(); // Do some stuff.
-  //   // showDialog(
-  //   //   context: context,
-  //   //   builder: (BuildContext context) => _buildExitDiolog(context),
-  //   // );
-  //   // print('Home Back Button pressed');
-
-  //   return true;
-  // }
 
   Widget _buildExitDiolog(BuildContext context) {
     return new AlertDialog(

@@ -38,7 +38,6 @@ dev_dependencies:
   firebase_storage: ^5.0.1
   firebase_core: ^0.5.2
   flutter_auth_buttons: ^0.10.0
-  back_button_interceptor: ^4.4.1
   http: ^0.12.2
   firebase_database: ^4.4.0
   cloud_firestore: ^0.14.4
