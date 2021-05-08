@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main() {
   runApp(Helppage());
@@ -16,18 +15,6 @@ class _HelppageState extends State<Helppage> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
-
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.of(context).pop();
-    return true;
   }
 
   @override

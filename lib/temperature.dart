@@ -3,7 +3,6 @@ import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 void main() {
   runApp(
@@ -24,20 +23,8 @@ class _WeatherAppState extends State<WeatherApp> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
     Temp = null;
     data();
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
-
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Navigator.of(context).pop();
-    return true;
   }
 
   var _currentCords;

@@ -56,10 +56,14 @@ class LoginApp extends StatelessWidget {
                           child: SignInButton(
                             Buttons.GoogleDark,
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Auth()),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => Auth()),
+                              // );
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => Auth()),
+                                  (Route<dynamic> route) => false);
                             },
                           ),
                         ),

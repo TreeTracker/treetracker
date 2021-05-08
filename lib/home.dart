@@ -30,28 +30,28 @@ class _AppHomePageState extends State<AppHomePage> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
+    // BackButtonInterceptor.add(myInterceptor);
     FirebaseAuth.instance.authStateChanges().listen((user) {
       setState(() {});
     });
   }
 
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(myInterceptor);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   BackButtonInterceptor.remove(myInterceptor);
+  //   super.dispose();
+  // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    // Navigator.of(context).pop(); // Do some stuff.
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) => _buildExitDiolog(context),
-    // );
-    // print('Home Back Button pressed');
+  // bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  //   // Navigator.of(context).pop(); // Do some stuff.
+  //   // showDialog(
+  //   //   context: context,
+  //   //   builder: (BuildContext context) => _buildExitDiolog(context),
+  //   // );
+  //   // print('Home Back Button pressed');
 
-    return true;
-  }
+  //   return true;
+  // }
 
   Widget _buildExitDiolog(BuildContext context) {
     return new AlertDialog(

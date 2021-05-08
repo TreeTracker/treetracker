@@ -36,12 +36,12 @@ class _BootScreenState extends State<BootScreen> {
     });
     if (_user == null) {
       Timer(
-          Duration(seconds: 3),
+          Duration(seconds: 2),
           () => Navigator.push(
               context, MaterialPageRoute(builder: (context) => LoginApp())));
     } else {
       Timer(
-          Duration(seconds: 3),
+          Duration(seconds: 2),
           () => Navigator.push(
               context, MaterialPageRoute(builder: (context) => AppHomePage())));
     }
