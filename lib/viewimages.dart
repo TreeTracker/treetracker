@@ -7,6 +7,7 @@ import 'package:image/image.dart' as ImD;
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:treetracker/mytrees.dart';
 
 main() {
   runApp(
@@ -77,6 +78,81 @@ class _ViewImagesState extends State<ViewImages> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildDeleteDialog(BuildContext context) {
+    return new AlertDialog(
+      backgroundColor: Colors.grey[900],
+      title: const Text(
+        'Delete',
+        style: TextStyle(
+          fontFamily: 'Ubuntu',
+          color: Colors.green,
+        ),
+      ),
+      // content: new Text('Your Tree was added'),
+      content: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset('assets/images/sad.gif'),
+            Padding(
+              padding: EdgeInsets.only(top: 20.0),
+            ),
+            Text(
+              'Are you sure you want to delete this tree?',
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  color: Colors.brown,
+                  child: Text(
+                    'No',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Ubuntu',
+                    ),
+                  ),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    postReference
+                        .document(ouruser.uid)
+                        .collection("userPosts")
+                        .document(widget.postID)
+                        .delete();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyTrees()),
+                    );
+                  },
+                  color: Colors.green,
+                  child: Text(
+                    'Yes',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Ubuntu',
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -159,6 +235,7 @@ class _ViewImagesState extends State<ViewImages> {
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
+
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -231,6 +308,20 @@ class _ViewImagesState extends State<ViewImages> {
             fontFamily: 'Ubuntu',
           ),
         ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) =>
+                      _buildDeleteDialog(context),
+                );
+              })
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: captureImage,
