@@ -7,7 +7,6 @@ import 'package:image/image.dart' as ImD;
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
-import 'package:treetracker/mytrees.dart';
 
 main() {
   runApp(
@@ -32,6 +31,7 @@ class _ViewImagesState extends State<ViewImages> {
   bool uploading = false;
   final name = DateTime.now();
   var postReference = Firestore.instance.collection('Trees');
+  var test = 0;
 
   Widget _buildPopupDialog(BuildContext context) {
     return new AlertDialog(
@@ -134,10 +134,11 @@ class _ViewImagesState extends State<ViewImages> {
                         .collection("userPosts")
                         .document(widget.postID)
                         .delete();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyTrees()),
-                    );
+
+                    setState(() {
+                      test = 1;
+                    });
+                    Navigator.pop(context);
                   },
                   color: Colors.green,
                   child: Text(
@@ -167,6 +168,7 @@ class _ViewImagesState extends State<ViewImages> {
         .collection('allImages')
         .snapshots();
     file = null;
+    test = 0;
   }
 
   Future captureImage() async {
@@ -234,8 +236,6 @@ class _ViewImagesState extends State<ViewImages> {
   uploadForm() {
     return Scaffold(
       appBar: AppBar(
-        // automaticallyImplyLeading: true,
-
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -295,89 +295,164 @@ class _ViewImagesState extends State<ViewImages> {
   }
 
   showImages() {
-    return Scaffold(
-      backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[800],
-        automaticallyImplyLeading: true,
-        centerTitle: true,
-        title: Text(
-          widget.nickname,
-          style: TextStyle(
-            color: Colors.green,
-            fontFamily: 'Ubuntu',
-          ),
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.delete,
-                color: Colors.red,
-              ),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) =>
-                      _buildDeleteDialog(context),
-                );
-              })
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: captureImage,
-        icon: Icon(
-          Icons.add_a_photo,
-          color: Colors.green,
-        ),
-        backgroundColor: Colors.grey[800],
-        label: Text(
-          'Add New Image',
-          style: TextStyle(
-            color: Colors.green,
-            fontFamily: 'Ubuntu',
-          ),
-        ),
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _myTreePhotos,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error),
-            );
-          }
-          if (!snapshot.hasData) {
-            return Center(
-              child: SizedBox(
-                height: 75,
-                width: 75,
-                child: CircularProgressIndicator(
-                  strokeWidth: 6,
+    return test == 0
+        ? Scaffold(
+            backgroundColor: Colors.grey[900],
+            appBar: AppBar(
+              backgroundColor: Colors.grey[800],
+              automaticallyImplyLeading: true,
+              centerTitle: true,
+              title: Text(
+                widget.nickname,
+                style: TextStyle(
+                  color: Colors.green,
+                  fontFamily: 'Ubuntu',
                 ),
               ),
-            );
-          }
-          final _data = snapshot.data.docs;
-          print(_data);
-          return ListView.builder(
-              itemCount: _data.length,
-              itemBuilder: (builder, index) {
-                final document = _data[index];
-                print(document["image"]);
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      color: Colors.grey[800],
-                      child: (Image.network(document["image"])),
+              actions: [
+                IconButton(
+                    icon: Icon(
+                      Icons.delete_forever_rounded,
+                      color: Colors.green,
+                    ),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            _buildDeleteDialog(context),
+                      );
+                    })
+              ],
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: captureImage,
+              icon: Icon(
+                Icons.add_a_photo,
+                color: Colors.green,
+              ),
+              backgroundColor: Colors.grey[800],
+              label: Text(
+                'Add New Image',
+                style: TextStyle(
+                  color: Colors.green,
+                  fontFamily: 'Ubuntu',
+                ),
+              ),
+            ),
+            body: StreamBuilder<QuerySnapshot>(
+              stream: _myTreePhotos,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(snapshot.error),
+                  );
+                }
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      height: 75,
+                      width: 75,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 6,
+                      ),
+                    ),
+                  );
+                }
+                final _data = snapshot.data.docs;
+                print(_data);
+                return ListView.builder(
+                  itemCount: _data.length,
+                  itemBuilder: (builder, index) {
+                    final document = _data[index];
+                    print(document["image"]);
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Card(
+                          color: Colors.grey[800],
+                          child: (Image.network(document["image"])),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Colors.grey[900],
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              centerTitle: true,
+              backgroundColor: Colors.grey[800],
+              title: Text(
+                'Removed',
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  color: Colors.grey[800],
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: ListTile(
+                        title: Text(
+                          "Your Tree was Removed",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Ubuntu',
+                            fontSize: 25,
+                            color: Colors.green,
+                          ),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Press the Back Button to go Back',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Ubuntu',
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                );
-              });
-        },
-      ),
-    );
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+                Container(
+                  child: Center(
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      color: Colors.green,
+                      child: Text(
+                        'Back',
+                        style: TextStyle(
+                          fontFamily: 'Ubuntu',
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
   }
 
   @override
