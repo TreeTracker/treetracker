@@ -98,8 +98,8 @@ class _AddTreeState extends State<AddTree> {
     );
   }
 
-  String lat = "";
-  String long = "";
+  String lat = "19.0760";
+  String long = "72.8777";
   getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
