@@ -7,6 +7,8 @@ import 'package:image/image.dart' as ImD;
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as Path;
 
 main() {
   runApp(
@@ -29,6 +31,8 @@ class _ViewImagesState extends State<ViewImages> {
   Stream<QuerySnapshot> _myTreePhotos;
   File file;
   bool uploading = false;
+  var _snapshotSize = 0;
+  var _snapshotData = new List(100);
   final name = DateTime.now();
   var postReference = Firestore.instance.collection('Trees');
   var test = 0;
@@ -81,6 +85,19 @@ class _ViewImagesState extends State<ViewImages> {
     );
   }
 
+  Future<void> deleteImage(String imageFileUrl) async {
+    var fileUrl = Uri.decodeFull(Path.basename(imageFileUrl))
+        .replaceAll(new RegExp(r'(\?alt).*'), '');
+    final Reference firebaseStorageRef =
+        FirebaseStorage.instance.ref().child(fileUrl);
+    try {
+      await firebaseStorageRef.delete();
+      print("Success");
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Widget _buildDeleteDialog(BuildContext context) {
     return new AlertDialog(
       backgroundColor: Colors.grey[900],
@@ -128,7 +145,16 @@ class _ViewImagesState extends State<ViewImages> {
                   ),
                 ),
                 FlatButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    var delFile;
+                    print(_snapshotSize);
+                    for (var i = 0; i < _snapshotSize; i++) {
+                      // print(_snapshotData[i]);
+                      // print(_snapshotData[i]);
+                      delFile = _snapshotData[i];
+                      print(delFile);
+                      await deleteImage(delFile);
+                    }
                     postReference
                         .document(ouruser.uid)
                         .collection("userPosts")
@@ -167,6 +193,7 @@ class _ViewImagesState extends State<ViewImages> {
         .document(widget.postID)
         .collection('allImages')
         .snapshots();
+    print(_myTreePhotos);
     file = null;
     test = 0;
   }
@@ -359,12 +386,15 @@ class _ViewImagesState extends State<ViewImages> {
                   );
                 }
                 final _data = snapshot.data.docs;
-                print(_data);
+                _snapshotSize = _data.length;
+                // print(_data);
                 return ListView.builder(
                   itemCount: _data.length,
                   itemBuilder: (builder, index) {
                     final document = _data[index];
-                    print(document["image"]);
+                    // print(index);
+                    // print(document["image"]);
+                    _snapshotData[index] = document["image"];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
