@@ -69,18 +69,10 @@ class _WeatherAppState extends State<WeatherApp> {
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var temp = jsonResponse["list"][0]["main"]["temp"] - 273.15;
-      var min_temp = jsonResponse["list"][0]["main"]["temp_min"] - 273.15;
-      var max_temp = jsonResponse["list"][0]["main"]["temp_max"] - 273.15;
-      var humidity = jsonResponse["list"][0]["main"]["humidity"];
-      var tempText = temp.toString();
-      var minText = min_temp.toString();
-      var maxText = max_temp.toString();
-      var humidityText = humidity.toString();
+      var intTemp = temp.toInt();
+      var tempText = intTemp.toString();
       setState(() {
         Temp = tempText;
-        minTemp = minText;
-        maxTemp = maxText;
-        humid = humidityText;
       });
     } else {
       print('Request failed with status: ${response.statusCode}.');
@@ -149,120 +141,21 @@ class _WeatherAppState extends State<WeatherApp> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(20),
-                ),
-                Container(
-                  child: Card(
-                    color: Colors.grey[800],
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.location_city_rounded,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        _currentAddress,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Ubuntu',
-                          fontSize: 19,
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(100),
                 ),
                 Container(
                   child: Center(
-                    child: Card(
-                      color: Colors.green,
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 300,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Minimum:   ',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              ),
-                              Text(
-                                minTemp + "°C",
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Maximum:   ',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              ),
-                              Text(
-                                maxTemp + "°C",
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Humidity:   ',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              ),
-                              Text(
-                                humid + "%",
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                  fontFamily: 'Ubuntu',
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                          ),
-                        ],
+                    child: Text(
+                      _currentAddress,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Ubuntu',
+                        fontSize: 30,
+                        color: Colors.green,
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
     );

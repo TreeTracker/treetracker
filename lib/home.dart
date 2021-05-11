@@ -292,13 +292,13 @@ class _AppHomePageState extends State<AppHomePage> {
           centerTitle: true,
           leading: IconButton(
             icon: Icon(
-              Icons.exit_to_app,
+              Icons.help_rounded,
               color: Colors.white,
             ),
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => _buildExitDiolog(context),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Helppage()),
               );
             },
           ),
@@ -565,6 +565,7 @@ class _AppHomePageState extends State<AppHomePage> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Card(
+                  color: Colors.grey[800],
                   margin: EdgeInsets.fromLTRB(16, 16, 16, 16),
                   shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(25),
@@ -586,7 +587,7 @@ class _AppHomePageState extends State<AppHomePage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(25),
                               child: Image.asset(
-                                'assets/images/goals.jpg',
+                                'assets/images/goalNew.png',
                                 width: 5000,
                                 height: 5000,
                                 fit: BoxFit.fill,

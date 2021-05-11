@@ -280,11 +280,7 @@ class _ViewImagesState extends State<ViewImages> {
       backgroundColor: Colors.grey[900],
       body: ListView(
         children: [
-          uploading
-              ? LinearProgressIndicator(
-                  backgroundColor: Colors.green,
-                )
-              : Text(''),
+          uploading ? LinearProgressIndicator() : Text(''),
           Container(
             height: 230,
             width: MediaQuery.of(context).size.width * 0.8,

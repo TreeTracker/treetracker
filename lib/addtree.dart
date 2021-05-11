@@ -211,11 +211,7 @@ class _AddTreeState extends State<AddTree> {
       ),
       body: ListView(
         children: <Widget>[
-          uploading
-              ? LinearProgressIndicator(
-                  backgroundColor: Colors.green,
-                )
-              : Text(''),
+          uploading ? LinearProgressIndicator() : Text(''),
           Container(
             height: 230,
             width: MediaQuery.of(context).size.width * 0.8,
