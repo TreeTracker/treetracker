@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:treetracker/addtree.dart';
 import 'viewimages.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -22,6 +23,18 @@ class _MyTreesState extends State<MyTrees> {
   Marker marker;
   GoogleMapController _controller;
   final LatLng _center = const LatLng(19.0760, 72.8777);
+
+  changeMapMode() {
+    getJsonFile("assets/maps_theme/nightmode.json").then(setMapStyle);
+  }
+
+  void setMapStyle(String mapStyle) {
+    _controller.setMapStyle(mapStyle);
+  }
+
+  Future<String> getJsonFile(String path) async {
+    return await rootBundle.loadString(path);
+  }
 
   @override
   void initState() {
@@ -165,8 +178,11 @@ class _MyTreesState extends State<MyTrees> {
               Flexible(
                 flex: 3,
                 child: GoogleMap(
+                  myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
                   onMapCreated: (GoogleMapController controller) {
                     _controller = controller;
+                    changeMapMode();
                   },
                   initialCameraPosition: CameraPosition(
                     target: _center,
