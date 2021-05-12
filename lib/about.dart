@@ -2,24 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() {
-  runApp(About());
-}
-
-class About extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // Hide the debug banner
-      debugShowCheckedModeBanner: false,
-
-      title: 'About Us',
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
+class AboutUsPage extends StatelessWidget {
   static String myVideoId = 'epdKlguk3m4';
   var _url =
       'https://www.ijert.org/research/digital-tracking-for-urban-trees-and-plants-IJERTV10IS040310.pdf';

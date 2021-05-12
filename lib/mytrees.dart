@@ -38,6 +38,17 @@ class _MyTreesState extends State<MyTrees> {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add_a_photo_rounded),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddTree()),
+              );
+            },
+          ),
+        ],
         backgroundColor: Colors.grey[800],
         centerTitle: true,
         // automaticallyImplyLeading: true,

@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:treetracker/about.dart';
 import 'package:treetracker/aboutus.dart';
 import 'package:treetracker/climatechange.dart';
 import 'package:treetracker/help.dart';
@@ -267,7 +269,7 @@ class _AppHomePageState extends State<AppHomePage> {
           },
           backgroundColor: Colors.grey[800],
           icon: Icon(
-            Icons.add_a_photo_outlined,
+            Icons.add_a_photo,
             color: Colors.green,
           ),
           label: Text(
@@ -292,13 +294,13 @@ class _AppHomePageState extends State<AppHomePage> {
           centerTitle: true,
           leading: IconButton(
             icon: Icon(
-              Icons.help_rounded,
+              CupertinoIcons.info_circle,
               color: Colors.white,
             ),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Helppage()),
+                MaterialPageRoute(builder: (context) => AboutUsPage()),
               );
             },
           ),
@@ -587,7 +589,7 @@ class _AppHomePageState extends State<AppHomePage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(25),
                               child: Image.asset(
-                                'assets/images/goalNew.png',
+                                'assets/images/goals.jpg',
                                 width: 5000,
                                 height: 5000,
                                 fit: BoxFit.fill,
