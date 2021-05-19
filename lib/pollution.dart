@@ -67,7 +67,7 @@ class _AqiAppState extends State<AqiApp> {
     _getAddressFromLatLng();
     var key = "";
     var url =
-        "http://api.openweathermap.org/data/2.5/air_pollution?lat=$lat&lon=$long&appid=$key";
+        "https://api.openweathermap.org/data/2.5/air_pollution?lat=$lat&lon=$long&appid=$key";
     try {
       var response = await http.get(url);
     } catch (e) {

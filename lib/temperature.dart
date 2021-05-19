@@ -3,6 +3,7 @@ import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(
@@ -19,6 +20,7 @@ class WeatherApp extends StatefulWidget {
 
 class _WeatherAppState extends State<WeatherApp> {
   var Temp, minTemp, maxTemp, humid;
+  var response;
 
   @override
   void initState() {
@@ -65,7 +67,14 @@ class _WeatherAppState extends State<WeatherApp> {
     var key = "";
     var url =
         "https://api.openweathermap.org/data/2.5/find?lat=$lat&lon=$long&cnt=1&appid=$key";
-    var response = await http.get(url);
+    try {
+      response = await http.get(url);
+    } catch (e) {
+      setState(() {
+        Temp = 500;
+      });
+    }
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var temp = jsonResponse["list"][0]["main"]["temp"] - 273.15;
@@ -76,6 +85,18 @@ class _WeatherAppState extends State<WeatherApp> {
       });
     } else {
       print('Request failed with status: ${response.statusCode}.');
+      setState(() {
+        Temp = 500;
+      });
+    }
+  }
+
+  void _openReport() async {
+    var _mainUrl = "https://github.com/TreeTracker/treetracker/issues";
+    if (await canLaunch(_mainUrl)) {
+      await launch(_mainUrl);
+    } else {
+      throw 'Could not launch $_mainUrl';
     }
   }
 
@@ -111,53 +132,93 @@ class _WeatherAppState extends State<WeatherApp> {
                 ),
               ),
             )
-          : ListView(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(30),
-                ),
-                Container(
+          : Temp == 500
+              ? Container(
                   child: Center(
-                    child: Icon(
-                      Icons.cloud_outlined,
-                      color: Colors.white,
-                      size: 100,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.sync_problem,
+                          color: Colors.white,
+                          size: 100,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text(
+                            'Oops!!! There was some Error. Please Try again Later',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 30,
+                              fontFamily: 'Ubuntu',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            _openReport();
+                          },
+                          child: Text('Report'),
+                          color: Colors.green,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      Temp + "°C",
-                      style: TextStyle(
-                        fontSize: 45,
-                        color: Colors.white,
-                        fontFamily: 'Ubuntu',
+                )
+              : ListView(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(30),
+                    ),
+                    Container(
+                      child: Center(
+                        child: Icon(
+                          Icons.cloud_outlined,
+                          color: Colors.white,
+                          size: 100,
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(100),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      _currentAddress,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Ubuntu',
-                        fontSize: 30,
-                        color: Colors.green,
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                    ),
+                    Container(
+                      child: Center(
+                        child: Text(
+                          Temp + "°C",
+                          style: TextStyle(
+                            fontSize: 45,
+                            color: Colors.white,
+                            fontFamily: 'Ubuntu',
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.all(100),
+                    ),
+                    Container(
+                      child: Center(
+                        child: Text(
+                          _currentAddress,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Ubuntu',
+                            fontSize: 30,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
     );
   }
 }
