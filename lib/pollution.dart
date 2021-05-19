@@ -56,9 +56,9 @@ class _AqiAppState extends State<AqiApp> {
     setState(() {
       _currentCords = position;
       lat = position.latitude.toString();
+      long = position.longitude.toString();
       print(lat);
       print(long);
-      long = position.longitude.toString();
     });
   }
 
@@ -68,7 +68,14 @@ class _AqiAppState extends State<AqiApp> {
     var key = "";
     var url =
         "http://api.openweathermap.org/data/2.5/air_pollution?lat=$lat&lon=$long&appid=$key";
-    var response = await http.get(url);
+    try {
+      var response = await http.get(url);
+    } catch (e) {
+      setState(() {
+        Aqi = 500;
+      });
+    }
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       var aqiInt = jsonResponse["list"][0]["main"]["aqi"];
@@ -101,11 +108,23 @@ class _AqiAppState extends State<AqiApp> {
       });
     } else {
       print('Request failed with status: ${response.statusCode}.');
+      setState(() {
+        Aqi = 500;
+      });
     }
   }
 
   void _openLink() async {
     var _mainUrl = "https://en.wikipedia.org/wiki/Air_quality_index";
+    if (await canLaunch(_mainUrl)) {
+      await launch(_mainUrl);
+    } else {
+      throw 'Could not launch $_mainUrl';
+    }
+  }
+
+  void _openReport() async {
+    var _mainUrl = "https://github.com/TreeTracker/treetracker/issues";
     if (await canLaunch(_mainUrl)) {
       await launch(_mainUrl);
     } else {
@@ -145,136 +164,176 @@ class _AqiAppState extends State<AqiApp> {
                 ),
               ),
             )
-          : ListView(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(20),
-                ),
-                Container(
-                  child: Card(
-                    color: Colors.grey[800],
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.location_city_rounded,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        _currentAddress,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Ubuntu',
-                          fontSize: 19,
+          : Aqi == 500
+              ? Container(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.sync_problem,
+                          color: Colors.white,
+                          size: 100,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Text(
+                            'Oops!!! There was some Error. Please Try again Later',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 30,
+                              fontFamily: 'Ubuntu',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            _openReport();
+                          },
+                          child: Text('Report'),
                           color: Colors.green,
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                ),
-                Container(
-                  child: Card(
-                    color: Aqi == 1
-                        ? Colors.green
-                        : Aqi == 2
-                            ? Colors.green[800]
-                            : Aqi == 3
-                                ? Colors.orangeAccent
-                                : Aqi == 4
-                                    ? Colors.orange
-                                    : Colors.red,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.api_rounded,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        'Aqi Rating:  ' + Status,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Ubuntu',
-                          fontSize: 19,
-                          color: Colors.white,
-                        ),
-                      ),
+                )
+              : ListView(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(20),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                ),
-                Container(
-                  child: Card(
-                    color: Aqi == 1
-                        ? Colors.green
-                        : Aqi == 2
-                            ? Colors.green[800]
-                            : Aqi == 3
-                                ? Colors.orangeAccent
-                                : Aqi == 4
-                                    ? Colors.orange
-                                    : Colors.red,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.add_to_queue_outlined,
-                        color: Colors.white,
-                      ),
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ' Сoncentration of PM2.5 (Fine particles matter):  ' +
-                              Pm,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Ubuntu',
-                            fontSize: 19,
+                    Container(
+                      child: Card(
+                        color: Colors.grey[800],
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.location_city_rounded,
                             color: Colors.white,
+                          ),
+                          title: Text(
+                            _currentAddress,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Ubuntu',
+                              fontSize: 19,
+                              color: Colors.green,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(40),
-                ),
-                Container(
-                  child: Center(
-                    child: RaisedButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        _openLink();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.help,
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                    ),
+                    Container(
+                      child: Card(
+                        color: Aqi == 1
+                            ? Colors.green
+                            : Aqi == 2
+                                ? Colors.green[800]
+                                : Aqi == 3
+                                    ? Colors.orangeAccent
+                                    : Aqi == 4
+                                        ? Colors.orange
+                                        : Colors.red,
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.api_rounded,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            'Aqi Rating:  ' + Status,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Ubuntu',
+                              fontSize: 19,
                               color: Colors.white,
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(5),
-                            ),
-                            Text(
-                              'Know more About AQI',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ),
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                    ),
+                    Container(
+                      child: Card(
+                        color: Aqi == 1
+                            ? Colors.green
+                            : Aqi == 2
+                                ? Colors.green[800]
+                                : Aqi == 3
+                                    ? Colors.orangeAccent
+                                    : Aqi == 4
+                                        ? Colors.orange
+                                        : Colors.red,
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.add_to_queue_outlined,
+                            color: Colors.white,
+                          ),
+                          title: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              ' Сoncentration of PM2.5 (Fine particles matter):  ' +
+                                  Pm,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 19,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(40),
+                    ),
+                    Container(
+                      child: Center(
+                        child: RaisedButton(
+                          color: Colors.blue,
+                          onPressed: () {
+                            _openLink();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.help,
+                                  color: Colors.white,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(5),
+                                ),
+                                Text(
+                                  'Know more About AQI',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'Ubuntu',
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
     );
   }
 }
